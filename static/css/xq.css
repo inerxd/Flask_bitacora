@@ -1,0 +1,29 @@
+div#TIME{
+    width:550px;
+    height:400px;
+    background-image: url('/static/img/time.png');
+    background-repeat:no-repeat;
+    background-size:cover;
+    background-position:center center;
+    }
+
+    div#Bitacora{
+        width:550px;
+        height:400px;
+        background-image: url('/static/img/bitacora.jpg');
+        background-repeat:no-repeat;
+        background-size:cover;
+        background-position:center center;
+        border-left: 15px solid black;
+        }
+h1{
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    margin-top: 15px;
+}
+
+p{
+    
+    font-family: 'Montserrat', sans-serif;
+}
+

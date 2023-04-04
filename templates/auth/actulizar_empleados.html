@@ -1,0 +1,76 @@
+{% extends './layaut.html' %}
+{% block title %}Actualizar empleados{% endblock %}
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for ('static' , filename='css/login.css')}}">
+{% endblock %}
+
+
+{% block body %}
+
+
+<form class="form-signin"  name="myForm" action="/actualizar_empleado/{{datos.id_empleado}}" method="POST">
+    <img class="mb-4" src="{{ url_for ('static' , filename ='img/logo_sigsa.svg')}}" alt="" width="72" height="57">
+    <h1 class="h3 mb-3 fw-normal">Actualizar los datos del empleado</h1>
+    <div class="row">
+      <div class="col">
+    <div class="form-floating">
+       
+        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="javier lopez" value ="{{datos.nombre}}" required >
+        
+      </div>
+        </div>
+    
+        <div class="col"> 
+      <div class="form-floating">
+       <input type="text" class="form-control" id="rfc" name="rfc" placeholder="slop789" minlength="8" maxlength="120" value ="{{datos.rfc}}" required>
+        
+      </div>
+        </div>
+          </div>
+
+          <div class="row"> 
+            <div class="col"> 
+      <div class="form-floating">
+        <input type="text" class="form-control" id="direccion" name="direccion" placeholder="centro avenida 15"  maxlength="120" value ="{{datos.direccion}}"required>
+        
+      </div>
+      </div>
+
+      <div class="col"> 
+      <div class="form-floating">
+        <input type="text" class="form-control" id="grado_estudio" name="grado_estudio" placeholder="licencitura concluida"  maxlength="120" value ="{{datos.grado_estudio}}"required>
+        
+      </div>
+      </div>
+      </div>
+    
+        <div class="row">
+        <div class="col"> 
+      <div class="form-floating">
+        <input type="number" class="form-control" id="edad" name="edad" placeholder="35"  maxlength="120" value ="{{datos.edad}}"required>
+        
+      </div>
+      </div>
+
+        <div class="col">
+      <div class="form-floating">
+        <input type="text" class="form-control" id="puesto" name="puesto" placeholder="desarrollador de sadi"  maxlength="120" value ="{{datos.puesto}}"required>
+        
+      </div>
+      </div>
+      </div>
+   
+
+
+
+    
+    <button class="w-100 btn btn-lg btn-primary"  type="submit" >Enviar Datos</button>
+    <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
+  </form>
+  {% block customJS %}
+  
+  <script src="{{ url_for('static',filename='js/login.js') }}"></script>
+  
+  
+  {% endblock %}
+{% endblock %}

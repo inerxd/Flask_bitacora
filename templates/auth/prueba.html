@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="{{ url_for ('static' , filename='css/navlat.css')}}">
+ 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    
+    
+
+</head>
+<body id="body">
+  
+    
+   <header>
+      
+
+
+
+
+   </header>
+      
+      <div class="menu__side" id="menu_side">
+        
+          <div class="icon__menu">
+            <i class="fas fa-bars" id ="btn_open"></i>
+          </div>
+        
+        
+        <div class="name__page">
+            <i class="fab fa-youtube"></i>
+            <h4>Sigsa</h4>
+        </div>
+            
+      
+        <div class="options__menu">
+              <a href="/registro" class="selected">
+                  <div class="option">
+                    <i class="fa-solid fa-envelope" title="Correos"></i>
+                      <h4>Correos</h4>
+                  </div>
+              </a>
+
+              <a href="/RegistroE" >
+                <div class="option">
+                  <i class="fa-solid fa-id-card" title="Trabajadores"></i>
+                  <h4>Trabajadores</h4>  
+                </div>
+              </a>
+             
+
+              <a href="#" >
+                <div class="option">
+                  <i class="fa-solid fa-book" title="Bitacoras"></i>
+                  <h4>Bitacoras</h4>
+                </div>
+              </a>
+              <a href="/logout" type="button" class="btn btn-link" style="padding-right: -10px;">
+                <div class="option">
+                  <i class="fa-solid fa-door-open" title="Logout"></i>
+                  <h4>Logout</h4>
+                </div>
+              </a>
+
+            </div>
+      </div>
+
+      <table class="table" style="margin: 100px ;">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Correos</th>
+            <th scope="col">Empleados</th>
+            <th scope="col">Bitacora</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Correos</th>
+<!--primero modal correos--><td>
+              <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Informacion
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      
+        <table class="table">
+          <thead>
+           
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">First</th>
+              <th scope="col">Last</th>
+              <th scope="col">Handle</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            {% for leg in user %}
+            <tr>
+              <th scope="row"></th>
+              <td>{{loop.index}}</td>
+              <td>{{leg.usuario}}</td>
+              <td>{{leg.password}}</td>
+              
+            </tr>
+            
+            <th scope="row"></th>
+            <tr>
+              <td><a class="btn btn-primary" class="nav-link" role="button" href="{{ url_for('ruta.actualizar' , id= leg.id_usuario)}}">Actualizar</a></td>
+              <td><a class="btn btn-primary" class="nav-link" role="button" href="{{ url_for('ruta.Eliminar',id = leg.id_usuario)}}">Eliminar</a></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+            </td>
+
+
+            <!--2 modal correos--><td>
+  <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+  Registro de correos
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        
+        <form class="form-signin"  name="myForm" action="/Datos" method="post">
+          <img class="mb-4" src="{{ url_for ('static' , filename ='img/logo_sigsa.svg')}}" alt="" width="72" height="57">
+          <h1 class="h3 mb-3 fw-normal">Registro de correo</h1>
+      
+          <div class="form-floating">
+            <input type="hidden" name="csrf_token" value="{{csrf_token}}">
+            <input type="email" class="form-control" id="email" name="usuario" placeholder="name@example.com" required>
+            <label for="floatingInput">Email address</label>
+          </div>
+          <div class="form-floating">
+            <input type="password" class="form-control" id="password" name="password" placeholder="password" minlength="6" maxlength="120" required>
+            <label for="floatingPassword">Password</label>
+          </div>
+      
+          
+          <button class="w-100 btn btn-lg btn-primary" type="submit">Registro</button>
+          <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
+        </form>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+            </td>
+            <!-- Modal 3.1--><td>
+              <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="form-signin"  name="myForm" action="/actualizar/{{datos_empleado.id_usuario}}" method="POST">
+          <img class="mb-4" src="{{ url_for ('static' , filename ='img/logo_sigsa.svg')}}" alt="" width="72" height="57">
+          <h1 class="h3 mb-3 fw-normal">Actualizar los datos de correo</h1>
+      
+          <div class="form-floating">
+            <input type="email" class="form-control" id="usuario" name="usuario" placeholder="name@example.com" value ="{{datos_empleado.usuario}}">
+            <label for="floatingInput" >Email address</label>
+          </div>
+          <div class="form-floating">
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password" value ="{{datos_empleado.password}}">
+            <label for="floatingPassword" >Password</label>
+          </div>
+          <div class="form-floating">
+            
+         
+          <button class="w-100 btn btn-lg btn-primary"  type="submit">Actualizar</button>
+          <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+ <!-- Modal 3.2-->
+ <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Empleados</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <th scope="row">Bitacora</th>
+            <td colspan="2">Larry the Bird</td>
+            <td>@twitter</td>
+          </tr>
+        </tbody>
+      </table>
+
+
+ 
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="{{ url_for('static',filename='js/json.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/lateral.js') }}"></script>
+<script src="https://kit.fontawesome.com/dc7acab7cc.js" crossorigin="anonymous"></script>
+    
+</body>
+</div>
+<!-- Footer -->
+  <footer class="text-center text-lg-start bg-light text-muted">
+    <!-- Section: Social media -->
+    <section
+      class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+      <!-- Left -->
+      <div class="me-5 d-none d-lg-block">
+        <span style="padding-left: 60px;">Redes sociales de SIGSA:</span >
+      </div>
+      <!-- Left -->
+
+      <!-- Right -->
+      <div>
+        <a href="https://www.facebook.com/sigsa.gis/" class="me-4 text-reset">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://twitter.com/SIGSAmexico" class="me-4 text-reset">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="https://www.youtube.com/channel/UCKG4v2WVVQKzmyDTUuUnmgQ" class="me-4 text-reset">
+          <i class="fa-brands fa-youtube"></i>
+        </a>
+        <a href="https://www.instagram.com/sigsagram/" class="me-4 text-reset">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://www.linkedin.com/company/sigsa" class="me-4 text-reset">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </div>
+      <!-- Right -->
+    </section>
+    <!-- Section: Social media -->
+
+    <!-- Section: Links  -->
+    
+
+    <!-- Copyright -->
+    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+      © 2022 Copyright:
+      <a class="text-reset fw-bold" href="#">SIGSA</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
+  <!-- Footer -->
+
+  
+
+  </html>

@@ -1,0 +1,53 @@
+{% extends './layaut.html' %}
+{% block title %}Login{% endblock %}
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for ('static' , filename='css/login.css')}}">
+{% endblock %}
+
+
+{% block body %}
+
+<form class="form-signin"  name="myForm" action="/acceso" method="POST">
+    <img class="mb-4" src="{{ url_for ('static' , filename ='img/logo_sigsa.svg')}}" alt="" width="72" height="57">
+    <h1 class="h3 mb-3 fw-normal">INICIAR SESION</h1>
+
+    <div class="form-floating">
+      <input type="email" class="form-control" id="usuario" name="usuario" placeholder="name@example.com">
+      <label for="floatingInput">Email address</label>
+    </div>
+    <div class="form-floating">
+      <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+      <label for="floatingPassword">Password</label>
+    </div>
+
+    
+    <button class="w-100 btn btn-lg btn-primary" type =" button"    id="prueba"    >Login</button>
+    {% with messages = get_flashed_messages(with_categories=True) %}
+
+    {% if messages %}
+    
+    {%for category,message in messages %}
+    
+    {% if category == 'warning' %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <strong>{{message}}</strong> 
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% else %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <strong>{{message}}</strong> 
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    {% endif %}
+
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    
+    <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
+  </form>
+  {% block customJS %}
+  <script src="{{ url_for('static',filename='js/login.js') }}"></script>
+  {% endblock %}
+{% endblock %}
