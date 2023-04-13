@@ -1,4 +1,4 @@
-from flask import Blueprint, flash,render_template, request, url_for,redirect,flash,session,make_response
+from flask import Blueprint, flash,render_template, request, url_for,redirect,flash,session,jsonify,make_response
 #from flask_wtf.csrf import CSRFProtect
 from Models.date import Usuario
 from Models.date import Empleados
@@ -207,9 +207,24 @@ def cookies():
     #retornamos la respuesta
     return resp
     
+@ruta.route("/actualizar_json/<id>",methods=['GET'])
+def actualizar_json(id):
+    datos = Empleados.query.get(id)
 
+   
+    return render_template('auth/actulizar_empleados.html',datos=datos)
 
+@ruta.route("/actualizar_empleado/<id>",methods=['PUT'])
+def actualizar_empleados(id):
+    datos = Empleados.query.get(id)
+    req = request.get_json()
 
+    print(req)
+
+    res = make_response(jsonify({"message:":"JSON received"}),200)
+    return res
+
+"""
 @ruta.route("/actualizar_empleado/<id>",methods=['GET','POST'])
 def actualizar_empleados(id):
     datos = Empleados.query.get(id)
@@ -227,7 +242,7 @@ def actualizar_empleados(id):
         return redirect(url_for("ruta.admin"))
 
     
-    return render_template('auth/actulizar_empleados.html',datos=datos)
+    return render_template('auth/actulizar_empleados.html',datos=datos)"""
 
 
 

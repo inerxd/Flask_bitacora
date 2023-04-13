@@ -8,14 +8,15 @@
 {% block body %}
 
 
-<form class="form-signin"  name="myForm" action="/actualizar_empleado/{{datos.id_empleado}}" method="POST">
-    <img class="mb-4" src="{{ url_for ('static' , filename ='img/logo_sigsa.svg')}}" alt="" width="72" height="57">
+<!--<form class="form-signin"  name="myForm" action="/actualizar_empleado/{{datos.id_empleado}}" method="POST" id="form">-->
+ 
+  <img class="mb-4" src="{{ url_for ('static' , filename ='img/logo_sigsa.svg')}}" alt="" width="72" height="57">
     <h1 class="h3 mb-3 fw-normal">Actualizar los datos del empleado</h1>
     <div class="row">
       <div class="col">
     <div class="form-floating">
        
-        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="javier lopez" value ="{{datos.nombre}}" required >
+        <input type="text" class="form-control" id="name" name="nombre" placeholder="javier lopez" value ="{{datos.nombre}}" required >
         
       </div>
         </div>
@@ -58,19 +59,65 @@
         
       </div>
       </div>
+
+      <div class="col">
+      <div class="form-floating">
+        <input type="hidden" class="form-control" id="id" name="id" placeholder="desarrollador de sadi"  maxlength="120" value ="{{datos.id_empleado}}"required>
+        
+      </div>
+      </div>
       </div>
    
 
 
 
-    
-    <button class="w-100 btn btn-lg btn-primary"  type="submit" >Enviar Datos</button>
-    <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
-  </form>
+    <div>
+   <!-- Esto es un comentario  <button class="w-100 btn btn-lg btn-primary"  type="submit" id="enviar">Enviar Datos</button>-->
+   <button class="btn btn-primary"  onclick="submit_entry()" >enviar datos</button>
+   <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
+  </div>
   {% block customJS %}
   
   <script src="{{ url_for('static',filename='js/login.js') }}"></script>
+ 
   
+  {% endblock %}
+  {% block script %}
+  <script>
+    function submit_entry(){
+
+          
+          var id = document.getElementById('id');
+          var idReg = id.value;
+          var name = document.getElementById('name');
+          var rfc = document.getElementById('rfc');
+          var direccion = document.getElementById('direccion');
+          var grado_estudio = document.getElementById('grado_estudio');
+          var  edad = document.getElementById('edad');
+          var   puesto = document.getElementById('puesto')
+           
+        var entry = {
+          
+          name: name.value,
+          rfc: rfc.value,
+          direccion:direccion.value,
+          grado_estudio: grado_estudio.value,
+          edad: edad.value,
+          puesto: puesto.value,       };
+          
+          fetch(`${window.origin}/actualizar_empleado/${idReg}`,{
+            method: "PUT",
+            credentials: "include",
+            body:JSON.stringify(entry),
+            cache: "no-cache",
+            headers: new Headers({
+              "content-type": "application/json"
+            })
+          })
+         
+    }
+  
+  </script>
   
   {% endblock %}
 {% endblock %}

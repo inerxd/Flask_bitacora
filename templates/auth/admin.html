@@ -121,7 +121,7 @@
               <td>{{prueba.grado_estudio}}</td>
               <td>{{prueba.edad}}</td>
               <td>{{prueba.puesto}}</td>
-              <td><a class="btn btn-primary" class="nav-link" role="button" href="{{ url_for('ruta.actualizar_empleados' , id= prueba.id_empleado)}}">Actualizar</a></td>
+              <td><a class="btn btn-primary" class="nav-link" role="button" href="{{ url_for('ruta.actualizar_json' , id= prueba.id_empleado)}}">Actualizar</a></td>
               <td><a class="btn btn-primary" class="nav-link" role="button" href="{{ url_for('ruta.Eliminar_empleado',id = prueba.id_empleado)}}">Eliminar</a></td>
             </tr>
             {% endfor %}   
