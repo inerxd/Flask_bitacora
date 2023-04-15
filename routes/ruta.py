@@ -129,7 +129,7 @@ def admin():
 def logout():
     session.clear()
     flash(Logout,'success')
-    return redirect(url_for("ruta.login"))
+    return redirect(url_for("ruta.acceso_al_sistema"))
 """
     resp = make_response("")
     datos_empleado = Empleados.query.all()
@@ -207,16 +207,14 @@ def cookies():
     #retornamos la respuesta
     return resp
     
-@ruta.route("/actualizar_json/<id>",methods=['GET','PUT'])
-def actualizar_json(id):
-    datos = Empleados.query.get(id)
 
-   
-    return render_template('auth/actulizar_empleados.html',datos=datos)
 
-@ruta.route("/actualizar_empleado/<id>",methods=['PUT'])
+@ruta.route("/actualizar_empleado/<id>",methods=['GET','PUT'])
 def actualizar_empleados(id):
     datos = Empleados.query.get(id)
+    if request.method == "GET":
+        return render_template('auth/actulizar_empleados.html',datos=datos)
+    
     req = request.get_json()
     try :
         if request.method == "PUT":
