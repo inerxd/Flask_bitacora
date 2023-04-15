@@ -81,17 +81,16 @@ def registro_empleado():
 
     return redirect(url_for("ruta.acceso"))
 
-@ruta.route("/login",methods=['GET'])
-def login():
-    
-    return render_template('auth/login.html')
+
 
     
 
-@ruta.route("/acceso",methods=['GET','POST'])
+@ruta.route("/acceso",methods=['GET','POST','PUT'])
 def acceso_al_sistema():
-        
-    resp = make_response("")
+
+    if  request.method == 'GET':
+        return  render_template('auth/login.html')
+
     name = request.form['usuario']
     name2 = request.form['password']
     if  request.method == 'POST':
@@ -112,7 +111,8 @@ def acceso_al_sistema():
         flash(Login_crediciales,'warning')
         return redirect(url_for("ruta.login"))
 
-@ruta.route("/admin",methods=['GET','POST'])
+
+@ruta.route("/admin",methods=['GET','POST','PUT'])
 def admin():
     datos_empleado = Empleados.query.all()
     user  = Usuario.query.all()
@@ -207,7 +207,7 @@ def cookies():
     #retornamos la respuesta
     return resp
     
-@ruta.route("/actualizar_json/<id>",methods=['GET'])
+@ruta.route("/actualizar_json/<id>",methods=['GET','PUT'])
 def actualizar_json(id):
     datos = Empleados.query.get(id)
 
@@ -218,12 +218,29 @@ def actualizar_json(id):
 def actualizar_empleados(id):
     datos = Empleados.query.get(id)
     req = request.get_json()
+    try :
+        if request.method == "PUT":
+            print("entro al metodo put")
 
-    print(req)
+            
+            datos.nombre = req['nombre']    
+            datos.rfc = req['rfc']
+            datos.direccion = req['direccion']    
+            datos.grado_estudio = req['grado_estudio']
+            datos.edad = req['edad']    
+            datos.puesto = req['puesto']
+            
+            db.session.commit()     
+            return redirect(url_for("ruta.admin"))
+            
+    except:               
+            print("Algo salió mal")
+    
+    
+    
 
-    res = make_response(jsonify({"message:":"JSON received"}),200)
-    return res
-
+    
+    
 """
 @ruta.route("/actualizar_empleado/<id>",methods=['GET','POST'])
 def actualizar_empleados(id):

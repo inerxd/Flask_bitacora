@@ -16,7 +16,7 @@
       <div class="col">
     <div class="form-floating">
        
-        <input type="text" class="form-control" id="name" name="nombre" placeholder="javier lopez" value ="{{datos.nombre}}" required >
+        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="javier lopez" value ="{{datos.nombre}}" required >
         
       </div>
         </div>
@@ -89,7 +89,7 @@
           
           var id = document.getElementById('id');
           var idReg = id.value;
-          var name = document.getElementById('name');
+          var nombre = document.getElementById('nombre');
           var rfc = document.getElementById('rfc');
           var direccion = document.getElementById('direccion');
           var grado_estudio = document.getElementById('grado_estudio');
@@ -98,7 +98,7 @@
            
         var entry = {
           
-          name: name.value,
+          nombre: nombre.value,
           rfc: rfc.value,
           direccion:direccion.value,
           grado_estudio: grado_estudio.value,
@@ -114,6 +114,15 @@
               "content-type": "application/json"
             })
           })
+          .then(function(response) {
+        if(response.ok) {
+            window.location.replace("http://localhost:5000/admin");
+            return;
+        }
+        throw new Error("Error en la respuesta de red");
+    }).catch(function(error) {
+        console.log(error);
+    });
          
     }
   
