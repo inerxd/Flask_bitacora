@@ -1,43 +1,43 @@
 
 
 #main{ 
-  margin:5px ;
-  /*color:red;
-  border-style: solid;*/
-  width:100%;
-  height: 450px;;
+  margin: 5px;
+  width: 100%;
+  height: 450px;
 }
+
 img{
-  height:100%;
-  width:100%;
-  max-height:445px;
+  height: 100%;
+  width: 100%;
+  max-height: 445px;
   max-width: 1150px;
 }
 
-.tamaño{
-
-margin-top: 20px;
-margin-left: 35px;
+.tamaño2 {
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  padding: 20px;
 }
 
-.tamaño2{
-  margin-top: 20px;
+.card {
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
 }
 
-.tamaño3{
-margin-top: 10px;
-text-align: center;
+.card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
 }
 
-h2{
-  font-family: 'Montserrat', sans-serif;
+.card-img-top {
+  max-height: 250px;
+  object-fit: cover;
 }
 
-h5{
-  font-family: 'Montserrat', sans-serif;
-
-}
-
-p{
-  font-family: 'Montserrat', sans-serif;
+.card-text {
+  font-size: 16px;
+  color: #333;
+  text-align: justify;
 }
