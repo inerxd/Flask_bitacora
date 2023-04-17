@@ -337,6 +337,10 @@ def actualizar_bitacora(id):
 def porque():
     return render_template('porque.html')
 
+@ruta.route("/ejemplo")
+def ejemplo():
+    return render_template('ejemplo.html')
+
     
 
 
