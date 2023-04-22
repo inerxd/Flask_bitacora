@@ -20,6 +20,20 @@
       <input type="password" class="form-control" id="password" name="password" placeholder="Password" value ="{{datos.password}}">
       <label for="floatingPassword" >Password</label>
     </div>
+    <div class="form-floating">
+      <input type="text" class="form-control" id="tipo_usuario" name="tipo_usuario" value="{{ datos.Tipo_User.tipo_usuarios }}" disabled>
+      <label for="tipo_usuario">Tipo de usuario</label>
+    </div>
+    <div class="form-floating">
+      <select class="form-select" id="tipo_usuario_select" name="tipo_usuario_select">
+        {% for tipo_usuario in tipos_usuario %}
+        <option value="{{ tipo_usuario.id }}">{{ tipo_usuario.tipo_usuarios }}</option>
+        {% endfor %}
+      </select>
+      <label for="tipo_usuario_select">Actualizar tipo de usuario</label>
+    </div>
+    
+    
     
     <div class="form-floating">
       <div class="col">
@@ -28,8 +42,10 @@
             value="{{datos.id_usuario}}" required />
         </div>
       </div>
+
       
-   
+   <br>
+  <br>
     <!--   <button class="w-100 btn btn-lg btn-primary"  type="submit" id="enviar">Enviar Datos</button>-->
    <button class="btn btn-primary"  onclick="submit_entry()" >enviar datos</button>
     <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
