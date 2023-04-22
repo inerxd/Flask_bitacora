@@ -143,8 +143,8 @@
             <tr>
               <th scope="col">#</th>
               <th scope="col">Correos</th>
-              <th scope="col"></th>
               <th scope="col">Contraseña</th>
+              <th scope="col-">Tipo de usuario</th>
               <th scope="col-">Funciones</th>
               <th scope="col-">Funciones</th>
             </tr>
@@ -158,14 +158,18 @@
                    <td>{{loop.index}}</td>
                    <td>{{leg.usuario}}</td>
                    <td>{{leg.password}}</td>
+                   <td>{{ leg.Tipo_User.tipo_usuarios }}</td>
                    <td><a class="btn btn-primary" class="nav-link" role="button" href="{{ url_for('ruta.actualizar' , id= leg.id_usuario)}}">Actualizar</a></td>
                    <td><a class="btn btn-primary" class="nav-link" role="button" href="{{ url_for('ruta.Eliminar',id = leg.id_usuario)}}">Eliminar</a></td>
-          
-           
-              
             </tr>
             {% endfor %} 
-            
+            <tr>
+              {% for tipo_usuario in tipo_usuario %}
+              <tr>
+                  <td>holaaaaa, {{ tipo_usuario.tipo_usuario }}</td>
+              </tr>
+              {% endfor %}
+            </tr>
              
           </tbody>
         </table>

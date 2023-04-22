@@ -4,7 +4,6 @@ from Models.date import Usuario
 from Models.date import Empleados
 from Models.date import Bitacora
 from Models.date import Tipo_User
-from Models.correos import ModeloUsuario
 from db import db
 from static.dicionario import *
 
@@ -25,8 +24,12 @@ def principal():
 # rutas de emails
 @ruta.route("/registro")
 def registro():
+   
+    tipo_usuario = Tipo_User.query.all()
+  
+    usuarios = Usuario.query.join(Tipo_User).add_columns(Tipo_User.tipo_usuarios).all()
 
-    return render_template('auth/registro.html')
+    return render_template('auth/registro.html', tipo_usuario=tipo_usuario, usuarios=usuarios)
 
 
 @ruta.route("/Datos",methods=['POST'])
@@ -34,27 +37,30 @@ def vacio2():
     
     name = request.form['usuario']
     name2 = request.form['password']
-    
-    me = Usuario(name, name2)
+    name3 = request.form['id_tipo_usuario']
+    me = Usuario(name, name2,name3)
     db.session.add(me)
     db.session.commit()
     
-    return redirect(url_for("ruta.login"))
+    return redirect(url_for("ruta.admin"))
 
-@ruta.route("/actualizar/<id>",methods=['GET','POST'])
+@ruta.route("/actualizar/<id>",methods=['GET','PUT'])
 def actualizar(id):
     datos = Usuario.query.get(id)
-    if request.method == "POST":
+    
+    if request.method == "GET":
+        return render_template('auth/actualizar.html',datos=datos)
+    req = request.get_json()
+    if request.method == "PUT":
         
-        datos.usuario = request.form['usuario']    
-        datos.password = request.form['password']
+        datos.usuario = req['usuario']    
+        datos.password = req['password']
         
         db.session.commit()
+        return redirect(url_for("ruta.admin"))        
         
-        return redirect(url_for("ruta.admin"))
 
     
-    return render_template('auth/actualizar.html',datos=datos)
 
 # rutas de empleados
 
@@ -116,6 +122,7 @@ def acceso_al_sistema():
 def admin():
     datos_empleado = Empleados.query.all()
     user  = Usuario.query.all()
+ 
     if 'prueba' in session:
             
             return render_template('auth/admin.html',datos_empleado=datos_empleado,user=user) 
@@ -130,84 +137,6 @@ def logout():
     session.clear()
     flash(Logout,'success')
     return redirect(url_for("ruta.acceso_al_sistema"))
-"""
-    resp = make_response("")
-    datos_empleado = Empleados.query.all()
-    resp.set_cookie( 'datose' , value = 'datos_empleado' , max_age = 1500 , expires = None , path = '/' , domain = None , secure = False , httponly = False , samesite = None )
-    user  = Usuario.query.all()
-    resp.set_cookie( 'datosr' , value = 'user' , max_age = 1500 , expires = None , path = '/' , domain = None , secure = False , httponly = False , samesite = None )
-    name = request.form['usuario']
-    name2 = request.form['password']
-    me = db.session.query(Usuario).filter_by(usuario=name,password=name2).first()
-    
-    if(me!=None):
-        session['prueba'] = name
-        if(me.Tipo_User.id==1):
-            return render_template('auth/admin.html',datos_empleado = request.cookies.get('datose'),user = request.cookies.get('datosr'), bita=request.cookies.get('datost') ) 
-        elif(me.Tipo_User.id==2):
-            return render_template('auth/bitacora.html')
-        elif ('prueba' in session):
-            return render_template ('auth/admin.html')
-        else:
-            return redirect(url_for("ruta.login"))
-        
-        
-        
-    else: 
-        return render_template('index.html')"""
-    
-        
-
-
-
-#recreacion lo que hice anteriormente
-"""
-@ruta.route("/acceso",methods=['GET','POST'])
-def acceso_al_sistema():
-   
-    datos_empleado = Empleados.query.all()
-   
-    user  = Usuario.query.all()
-  
-   
-    name = request.form['usuario']
-    name2 = request.form['password']
-    me = db.session.query(Usuario).filter_by(usuario=name,password=name2).first()
-    
-    if(me!=None):
-        session['prueba'] = name
-        if(me.Tipo_User.id==1):
-            return render_template('auth/prueba.html',datos_empleado = datos_empleado ,user = user ) 
-        elif(me.Tipo_User.id==2):
-            return render_template('auth/bitacora.html')
-        else:
-            print("hubo algun error")
-    else: 
-        return render_template('index.html')
-    """
-
-
-
-
-
-
-
-
-
-
-
-#cookies
-@ruta.route("/l")
-def cookies():
-   
-    #creamos la respuesta
-    resp = make_response("")
-    #almacenamos las cookies
-    resp.set_cookie('username','username_1')
-    #retornamos la respuesta
-    return resp
-    
-
 
 @ruta.route("/actualizar_empleado/<id>",methods=['GET','PUT'])
 def actualizar_empleados(id):
@@ -218,7 +147,7 @@ def actualizar_empleados(id):
     req = request.get_json()
     try :
         if request.method == "PUT":
-            print("entro al metodo put")
+           
 
             
             datos.nombre = req['nombre']    

@@ -1,6 +1,4 @@
 from db import db 
-from werkzeug.security import check_password_hash,generate_password_hash
-
 
 
 class Usuario (db.Model):
@@ -12,17 +10,11 @@ class Usuario (db.Model):
     usuario = db.Column(db.String(50), unique=True, nullable=False)
     password = db.Column(db.String(102), unique=True, nullable=False)
     
-
-    
-
-    def __init__(self,usuario,password):
+    def __init__(self,usuario,password,id_tipo_usuario):
         self.usuario = usuario
         self.password = password
+        self.id_tipo_usuario = id_tipo_usuario
         
-    
-    
-
-
 class Empleados (db.Model):
     __tablename__ = 'empleados'
     id_empleado = db.Column(db.Integer, primary_key=True,nullable=False)
@@ -59,7 +51,7 @@ class Tipo_User(db.Model):
     tipo_usuarios = db.Column(db.String(100), unique=True, nullable=False)
     Tipo_User_relacion = db.relationship('Usuario', backref='Tipo_User', lazy=True)
 
-    def __init__(self,tipo_usuarios):
+    def __init__(self,tipo_usuarios,):
         self.tipo_usuarios = tipo_usuarios
       
    

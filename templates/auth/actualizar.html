@@ -8,7 +8,7 @@
 {% block body %}
 
 
-<form class="form-signin"  name="myForm" action="/actualizar/{{datos.id_usuario}}" method="POST">
+
     <img class="mb-4" src="{{ url_for ('static' , filename ='img/logo_sigsa.svg')}}" alt="" width="72" height="57">
     <h1 class="h3 mb-3 fw-normal">Actualizar los datos de correo</h1>
 
@@ -20,16 +20,61 @@
       <input type="password" class="form-control" id="password" name="password" placeholder="Password" value ="{{datos.password}}">
       <label for="floatingPassword" >Password</label>
     </div>
+    
     <div class="form-floating">
+      <div class="col">
+        <div class="form-floating">
+          <input type="hidden" class="form-control" id="id" name="id" placeholder="desarrollador de sadi" maxlength="120"
+            value="{{datos.id_usuario}}" required />
+        </div>
+      </div>
       
    
-    <button class="w-100 btn btn-lg btn-primary"  type="submit">Actualizar</button>
+    <!--   <button class="w-100 btn btn-lg btn-primary"  type="submit" id="enviar">Enviar Datos</button>-->
+   <button class="btn btn-primary"  onclick="submit_entry()" >enviar datos</button>
     <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
-  </form>
-  {% block customJS %}
-  
+
+  {% block customJS %}  
   <script src="{{ url_for('static',filename='js/login.js') }}"></script>
+  {% endblock %}
+  {% block script %}
+  <script>
+    function submit_entry(){
+
+          
+          var id = document.getElementById('id');
+          var idReg = id.value;
+          var usuario = document.getElementById('usuario');
+          var password = document.getElementById('password');
+          
+           
+        var entry = {
+          
+          usuario: usuario.value,
+          password: password.value
+                 };
+          
+          fetch(`${window.origin}/actualizar/${idReg}`,{
+            method: "PUT",
+            credentials: "include",
+            body:JSON.stringify(entry),
+            cache: "no-cache",
+            headers: new Headers({
+              "content-type": "application/json"
+            })
+          })
+          .then(function(response) {
+        if(response.ok) {
+            window.location.replace("http://localhost:5000/admin");
+            return;
+        }
+        throw new Error("Error en la respuesta de red");
+    }).catch(function(error) {
+        console.log(error);
+    });
+         
+    }
   
-  
+  </script>
   {% endblock %}
 {% endblock %}
