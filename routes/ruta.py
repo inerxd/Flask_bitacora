@@ -48,17 +48,18 @@ def vacio2():
 def actualizar(id):
     datos = Usuario.query.get(id)
     tipo_usuario = Tipo_User.query.all()
-  
-    usuarios = Usuario.query.join(Tipo_User).add_columns(Tipo_User.tipo_usuarios).all()
+ 
    
     
     if request.method == "GET":
-        return render_template('auth/actualizar.html',datos=datos,tipo_usuario=tipo_usuario,usuarios=usuarios)
+        return render_template('auth/actualizar.html',datos=datos,tipo_usuario=tipo_usuario)
     req = request.get_json()
     if request.method == "PUT":
         
         datos.usuario = req['usuario']    
         datos.password = req['password']
+        datos.id_tipo_usuario = req['tipo_usuario']
+        
         
         db.session.commit()
         return redirect(url_for("ruta.admin"))        

@@ -20,19 +20,16 @@
       <input type="password" class="form-control" id="password" name="password" placeholder="Password" value ="{{datos.password}}">
       <label for="floatingPassword" >Password</label>
     </div>
+   
     <div class="form-floating">
-      <input type="text" class="form-control" id="tipo_usuario" name="tipo_usuario" value="{{ datos.Tipo_User.tipo_usuarios }}" disabled>
-      <label for="tipo_usuario">Tipo de usuario</label>
-    </div>
-    <div class="form-floating">
-      <select class="form-select" id="tipo_usuario_select" name="tipo_usuario_select">
-        {% for tipo_usuario in tipos_usuario %}
-        <option value="{{ tipo_usuario.id }}">{{ tipo_usuario.tipo_usuarios }}</option>
+    <label for="tipo_usuario">Tipo de usuario:</label>
+    <select  id="tipo_usuario">
+        {% for tipos_usuario in tipo_usuario %}
+        <option value="{{tipos_usuario.id }}">{{ tipos_usuario.tipo_usuarios }}</option>
         {% endfor %}
-      </select>
-      <label for="tipo_usuario_select">Actualizar tipo de usuario</label>
-    </div>
-    
+    </select>
+</div>
+   
     
     
     <div class="form-floating">
@@ -62,14 +59,16 @@
           var idReg = id.value;
           var usuario = document.getElementById('usuario');
           var password = document.getElementById('password');
+          var tipo_usuario = document.getElementById('tipo_usuario')
           
            
         var entry = {
           
           usuario: usuario.value,
-          password: password.value
+          password: password.value,
+          tipo_usuario:tipo_usuario.value
                  };
-          
+          console.log(entry);
           fetch(`${window.origin}/actualizar/${idReg}`,{
             method: "PUT",
             credentials: "include",
