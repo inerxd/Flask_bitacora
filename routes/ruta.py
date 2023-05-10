@@ -114,23 +114,24 @@ def acceso_al_sistema():
             return redirect(url_for("ruta.admin"))
         elif(me.Tipo_User.id==2):
             
-            return render_template('auth/bitacora.html')
+              return redirect(url_for("ruta.bit"))
         else:
            
             print("hubo algun error")
     else:
         flash(Login_crediciales,'warning')
-        return redirect(url_for("ruta.login"))
+        return redirect(url_for("ruta.acceso_al_sistema"))
 
 
 @ruta.route("/admin",methods=['GET','POST','PUT'])
 def admin():
     datos_empleado = Empleados.query.all()
     user  = Usuario.query.all()
+    bit = Bitacora.query.all()
  
     if 'prueba' in session:
             
-            return render_template('auth/admin.html',datos_empleado=datos_empleado,user=user) 
+            return render_template('auth/admin.html',datos_empleado=datos_empleado,user=user,bit=bit) 
         
     else: 
         return redirect(url_for("ruta.login"))
@@ -169,32 +170,6 @@ def actualizar_empleados(id):
             print("Algo salió mal")
     
     
-    
-
-    
-    
-"""
-@ruta.route("/actualizar_empleado/<id>",methods=['GET','POST'])
-def actualizar_empleados(id):
-    datos = Empleados.query.get(id)
-    if request.method == "POST":
-        
-        datos.nombre = request.form['nombre']    
-        datos.rfc = request.form['rfc']
-        datos.direccion = request.form['direccion']    
-        datos.grado_estudio = request.form['grado_estudio']
-        datos.edad = request.form['edad']    
-        datos.puesto = request.form['puesto']
-        
-        db.session.commit()
-        
-        return redirect(url_for("ruta.admin"))
-
-    
-    return render_template('auth/actulizar_empleados.html',datos=datos)"""
-
-
-
 
 @ruta.route("/Eliminar/<id>")
 def Eliminar(id):
@@ -212,38 +187,22 @@ def Eliminar_empleado(id):
 
     return redirect(url_for("ruta.admin"))
 
-"""
-@ruta.route("/admin")
-def admin():
-   
-    if 'prueba' in session:
-        empleado  = Empleados.query.all()
-        return render_template ('auth/admin.html',empleado=empleado)
-    else:
-        return redirect(url_for("ruta.login"))
-"""
-#1 rutas de bitacora 
-@ruta.route("/bitacora",methods=['GET','POST'])
-def bitacora():
 
-    
-    if 'prueba' in session:
-        nombre_bitacora = Bitacora.query.all()
-        return render_template ('auth/bitacora.html',nombre_bitacora=nombre_bitacora) 
-    else:
-        return redirect(url_for("ruta.login"))
+#1 rutas de bitacora 
+
 @ruta.route("/registro_bitacora",methods=['POST'])
 def registro_bitacora():
-
-   
+  
+    
+    id = int(request.form['id']) 
     name = request.form['dato_bitacora']
     name2 = request.form['comentarios']
     
-    me = Bitacora(name, name2)
+    me = Bitacora(name, name2,id)
     db.session.add(me)
     db.session.commit()
 
-    return redirect(url_for("ruta.bitacora"))
+    return redirect(url_for("ruta.bit"))
 
 @ruta.route("/Eliminarbitacora/<id>")
 def Eliminar_bitacora(id):
@@ -271,10 +230,20 @@ def actualizar_bitacora(id):
 def porque():
     return render_template('porque.html')
 
-@ruta.route("/ejemplo")
-def ejemplo():
-    return render_template('ejemplo.html')
+@ruta.route("/bit")
+def bit():
+    
+    if 'prueba' in session:
+        nombre_bitacora = Bitacora.query.all()
+        datos = Usuario.query.all()
+        return render_template ('auth/vistabit.html',nombre_bitacora=nombre_bitacora,datos=datos) 
+    else:
+        return redirect(url_for("ruta.acceso_al_sistema"))
 
+@ruta.route("/replazo")
+def replazo():
+
+    return render_template ("replazo.html")
     
 
 

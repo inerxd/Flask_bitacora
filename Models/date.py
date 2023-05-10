@@ -41,9 +41,10 @@ class Bitacora (db.Model):
     dato_bitacora = db.Column(db.String(100000), unique=True, nullable=False)
     comentarios = db.Column(db.String(100000), unique=True, nullable=False)
 
-    def __init__(self,dato_bitacora,comentarios):
+    def __init__(self,dato_bitacora,comentarios,usuario):
         self.dato_bitacora = dato_bitacora
         self.comentarios = comentarios
+        self.usuario = usuario
     
 class Tipo_User(db.Model):
     __tablename__ = 'Tipo_User'

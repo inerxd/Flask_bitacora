@@ -1,0 +1,23 @@
+.card {
+  margin: 20px;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+}
+
+.title-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}

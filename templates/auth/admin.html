@@ -88,7 +88,32 @@
       <div class="tab-content">
         <h2>Titulo 3</h2>
         <!-- Footer -->
+        <table class="table"  >
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">bitacora</th>
+              <th scope="col-">comentario</th>
        
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+             
+             
+               {% for bits in bit %}
+               <tr>
+                   <td>{{loop.index}}</td>
+                   <td>{{bits.dato_bitacora}}</td>
+                   <td>{{bits.comentarios}}</td>
+
+            </tr>
+            {% endfor %} 
+         
+             
+          </tbody>
+        </table>
 
       </div>
     </div>
