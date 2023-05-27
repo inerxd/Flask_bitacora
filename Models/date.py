@@ -6,15 +6,15 @@ class Usuario (db.Model):
     id_usuario = db.Column(db.Integer, primary_key=True,nullable=False)
     bitacora_relacion = db.relationship('Bitacora', backref='Usuario', lazy=True)
     id_tipo_usuario = db.Column(db.Integer, db.ForeignKey('Tipo_User.id'))
-    empleado = db.Column(db.Integer, db.ForeignKey('empleados.id_empleado'))
+    id_empleado = db.Column(db.Integer, db.ForeignKey('empleados.id_empleado'))
     usuario = db.Column(db.String(50), unique=True, nullable=False)
     password = db.Column(db.String(102), unique=True, nullable=False)
     
-    def __init__(self,usuario,password,id_tipo_usuario):
+    def __init__(self,usuario,password,id_tipo_usuario,id_empleado):
         self.usuario = usuario
         self.password = password
         self.id_tipo_usuario = id_tipo_usuario
-        
+        self.id_empleado = id_empleado       
 class Empleados (db.Model):
     __tablename__ = 'empleados'
     id_empleado = db.Column(db.Integer, primary_key=True,nullable=False)
@@ -33,6 +33,8 @@ class Empleados (db.Model):
         self.grado_estudio = grado_estudio
         self.edad = edad
         self.puesto = puesto
+    
+
 
 class Bitacora (db.Model):
     __tablename__ = 'bitacora'

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %}</title>
-    <link rel="shortcut icon " href="{{ url_for ('static' , filename ='img/logo_sigsa.svg')}}">
+    <link rel="shortcut icon " href="{{ url_for ('static' , filename ='img/logo.svg')}}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,8 +16,8 @@
        {% endblock %}
        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href="https://www.sigsa.info/es-mx/home" style="margin: 5px;">
-            <img src="{{ url_for('static', filename='img/logo_sigsa.svg')}}" alt="Logo de SIGSA" class="navbar-image">
+          <a class="navbar-brand"  style="margin: 5px;">
+            <img src="{{ url_for('static', filename='img/logo.svg')}}" alt="Logo de SIGSA" class="navbar-image">
           </a>
       
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,13 +29,13 @@
               <li class="nav-item" style="margin: 5px;">
                 <a class="nav-link" href="/">
                   <i class="fas fa-home fa-lg"></i>
-                  <div>Bienvenido</div>
+                  <div>Bienvenidos</div>
                 </a>
               </li>
               <li class="nav-item" style="margin: 5px;">
                 <a class="nav-link" href="{{ url_for('ruta.porque')}}">
                   <i class="fas fa-question-circle fa-lg"></i>
-                  <div>Por qué SIGSA</div>
+                  <div>Why</div>
                 </a>
               </li> 
               <li class="nav-item" style="margin: 5px;">
@@ -104,26 +104,29 @@
       class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
       <!-- Left -->
       <div class="me-5 d-none d-lg-block">
-        <span>Redes sociales de SIGSA:</span>
+        <span>Redes de ?:</span>
       </div>
       <!-- Left -->
 
       <!-- Right -->
       <div>
-        <a href="https://www.facebook.com/sigsa.gis/" class="me-4 text-reset">
+        <a href="https://www.facebook.com/" class="me-4 text-reset">
           <i class="fab fa-facebook-f"></i>
         </a>
-        <a href="https://twitter.com/SIGSAmexico" class="me-4 text-reset">
+        <a href="https://twitter.com/" class="me-4 text-reset">
           <i class="fab fa-twitter"></i>
         </a>
-        <a href="https://www.youtube.com/channel/UCKG4v2WVVQKzmyDTUuUnmgQ" class="me-4 text-reset">
+        <a href="https://www.youtube.com/" class="me-4 text-reset">
           <i class="fa-brands fa-youtube"></i>
         </a>
-        <a href="https://www.instagram.com/sigsagram/" class="me-4 text-reset">
+        <a href="https://www.instagram.com/" class="me-4 text-reset">
           <i class="fab fa-instagram"></i>
         </a>
-        <a href="https://www.linkedin.com/company/sigsa" class="me-4 text-reset">
+        <a href="https://www.linkedin.com/" class="me-4 text-reset">
           <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://github.com/inerxd?tab=repositories" class="me-4 text-reset">
+          <i class="fa-brands fa-square-github"></i>
         </a>
       </div>
       <!-- Right -->
@@ -135,8 +138,8 @@
 
     <!-- Copyright -->
     <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-      © 2022 Copyright:
-      <a class="text-reset fw-bold" href="#">SIGSA</a>
+      © 2022-2023 Copyright:
+      <a class="text-reset fw-bold" >Enterprise Javier</a>
     </div>
     <!-- Copyright -->
   </footer>

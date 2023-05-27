@@ -102,11 +102,12 @@
             <tr>
              
              
-               {% for bits in bit %}
+               {% for leg in bit %}
                <tr>
                    <td>{{loop.index}}</td>
-                   <td>{{bits.dato_bitacora}}</td>
-                   <td>{{bits.comentarios}}</td>
+                   <td>{{leg.Usuario.usuario}}</td>
+                   <td>{{leg.dato_bitacora}}</td>
+                   <td>{{leg.comentarios}}</td>
 
             </tr>
             {% endfor %} 

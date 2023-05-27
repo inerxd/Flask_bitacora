@@ -8,69 +8,81 @@
 {% block body %}
 
 <div class="estilos">
-  
-<form class="form-signin"  name="myForm" action="/empleado" method="post">
-  <div class="icono">
-  <img class="mb-4" src="{{ url_for ('static' , filename ='img/logo_sigsa.svg')}}" alt="" width="72" height="57" >
-</div>    
-  <div class="empleado">
-  <h1 class="h3 mb-3 fw-normal" >Registro de empleados</h1>
-</div>
+
+  <form class="form-signin" name="myForm" action="/empleado" method="post">
+    <div class="icono">
+      <img class="mb-4" src="{{ url_for ('static' , filename ='img/logo.svg')}}" alt="" width="72" height="57">
+    </div>
+    <div class="empleado">
+      <h1 class="h3 mb-3 fw-normal">Registro de empleados</h1>
+    </div>
     <div class="row">
       <div class="col-5" class="estilo">
-    <div class="form-floating">
-      <!--<input type="hidden" name="csrf_token" value="{{csrf_token}}">-->
-      <input type="text" class="form-control" id="nombre" name="nombre" placeholder="javier lopez" required>
-      <label for="floatingInput">Nombre del empleado</label>
-    </div>
+        <div class="form-floating">
+          <!--<input type="hidden" name="csrf_token" value="{{csrf_token}}">-->
+          <input type="text" class="form-control" id="nombre" name="nombre" placeholder="javier lopez" required>
+          <label for="floatingInput">Nombre del empleado</label>
+        </div>
       </div>
-     
+
       <div class="col-5" class="estilo">
-    <div class="form-floating">
-      <input type="text" class="form-control" id="rfc" name="rfc" placeholder="slop789" minlength="8" maxlength="120" required>
-      <label for="floatingPassword">RFC del empleado</label>
+        <div class="form-floating">
+          <input type="text" class="form-control" id="rfc" name="rfc" placeholder="slop789" minlength="8"
+            maxlength="120" required>
+          <label for="floatingPassword">RFC del empleado</label>
+        </div>
+      </div>
     </div>
-    </div>
-</div>
-      
-
-<div class="row">
-  <div class="col-5">
-    <div class="form-floating">
-      <input type="text" class="form-control" id="direccion" name="direccion" placeholder="centro avenida 15"  maxlength="120" required>
-      <label for="floatingPassword">Direccion del empleado</label>
-    </div>
-       </div>
-        
-
-
-  <div class="col-5"  class="estilo">
-    <div class="form-floating">
-      <input type="text" class="form-control" id="grado_estudio" name="grado_estudio" placeholder="licencitura concluida"  maxlength="120" required>
-      <label for="floatingPassword">Grado de estudio del empleado</label>
-    </div>
-  </div>
-</div>
-  
-<div class="row">
-  <div class="col-5"  class="estilo">
-    <div class="form-floating">
-      <input type="number" class="form-control" id="edad" name="edad" placeholder="35"  maxlength="120" required>
-      <label for="floatingPassword">Edad del empleado</label>
-    </div>
-  </div>
-
-  <div class="col-5"  class="estilo">
-    <div class="form-floating">
-      <input type="text" class="form-control" id="puesto" name="puesto" placeholder="desarrollador de sadi"  maxlength="120" required>
-      <label for="floatingPassword">Puesto del empleado</label>
-    </div>
-  </div>
-</div>
-
     
+
+
+    <div class="row">
+      <div class="col-5">
+        <div class="form-floating">
+          <input type="text" class="form-control" id="direccion" name="direccion" placeholder="centro avenida 15"
+            maxlength="120" required>
+          <label for="floatingPassword">Direccion del empleado</label>
+        </div>
+      </div>
+
+
+
+      <div class="col-5" class="estilo">
+        <div class="form-floating">
+          <input type="text" class="form-control" id="grado_estudio" name="grado_estudio"
+            placeholder="licencitura concluida" maxlength="120" required>
+          <label for="floatingPassword">Grado de estudio del empleado</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-5" class="estilo">
+        <div class="form-floating">
+          <input type="number" class="form-control" id="edad" name="edad" placeholder="35" maxlength="120" required>
+          <label for="floatingPassword">Edad del empleado</label>
+        </div>
+      </div>
+
+      <div class="col-5" class="estilo">
+        <div class="form-floating">
+          <input type="text" class="form-control" id="puesto" name="puesto" placeholder="desarrollador de sadi"
+            maxlength="120" required>
+          <label for="floatingPassword">Puesto del empleado</label>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col">
+      <div class="form-floating">
+        <input type="hidden" class="form-control"  name="id_email" 
+          value="{{id_email[0].id_usuario}}"  />
+      </div>
+    </div>
+
+
     <button class="btn btn-primary" type="submit" style="margin-left: 450px;">Enviar Datos</button>
-  
+
   </form>
 
 </div>

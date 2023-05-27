@@ -72,18 +72,23 @@ def actualizar(id):
 # pagina de registro
 @ruta.route("/RegistroE")
 def RegistroE():
-    return render_template ('auth/RegistroEmpleado.html')
+    id_email= Usuario.query.all()
+    return render_template ('auth/RegistroEmpleado.html',id_email=id_email)
 
 
 @ruta.route("/empleado",methods=['POST'])
 def registro_empleado():
+
     
     dato_empleado0 = request.form['nombre']
+    
     dato_empleado1 = request.form['rfc']
     dato_empleado2 = request.form['direccion']
     dato_empleado3 = request.form['grado_estudio']
     dato_empleado4 = request.form['edad']
     dato_empleado5 = request.form['puesto']
+    
+    
     
     me = Empleados(dato_empleado0,dato_empleado1,dato_empleado2,dato_empleado3,
     dato_empleado4,dato_empleado5)
