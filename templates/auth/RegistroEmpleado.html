@@ -33,7 +33,7 @@
         </div>
       </div>
     </div>
-    
+
 
 
     <div class="row">
@@ -71,14 +71,26 @@
           <label for="floatingPassword">Puesto del empleado</label>
         </div>
       </div>
-    </div>
-    
-    <div class="col">
-      <div class="form-floating">
-        <input type="hidden" class="form-control"  name="id_email" 
-          value="{{id_email[0].id_usuario}}"  />
+      <div class="col">
+        <div class="form-floating">
+          <input type="hidden" class="form-control" name="id_email" value="{{id_email[0].id_usuario}}" />
+        </div>
       </div>
+      
+      <div class="col">
+        <div class="form-floating">
+          <label for="tipo_usuario">Seleciones el Correo del Empleado:</label>
+          <select name="id_empleado" id="id_empleado">
+            {% for email in id_email %}
+            <option value="{{ email.id_usuario }}">{{ email.usuario }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+
     </div>
+
+
 
 
     <button class="btn btn-primary" type="submit" style="margin-left: 450px;">Enviar Datos</button>

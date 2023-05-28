@@ -15,6 +15,8 @@
     </div>
   </div>
 
+  
+
   <div class="col">
     <div class="form-floating">
       <input type="text" class="form-control" id="rfc" name="rfc" placeholder="slop789" minlength="8" maxlength="120"
@@ -56,6 +58,17 @@
 
   <div class="col">
     <div class="form-floating">
+      <label for="tipo_usuario">Seleciones el Correo del Empleado:</label>
+      <select  id="hola">
+        {% for dato in email %}
+        <option value="{{ dato.id_usuario }}">{{ dato.usuario }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="form-floating">
       <input type="hidden" class="form-control" id="id" name="id" placeholder="desarrollador de sadi" maxlength="120"
         value="{{datos.id_empleado}}" required />
     </div>
@@ -76,20 +89,24 @@
   function submit_entry() {
     var id = document.getElementById("id");
     var idReg = id.value;
+    var hola = document.getElementById("hola");
     var nombre = document.getElementById("nombre");
     var rfc = document.getElementById("rfc");
     var direccion = document.getElementById("direccion");
     var grado_estudio = document.getElementById("grado_estudio");
     var edad = document.getElementById("edad");
     var puesto = document.getElementById("puesto");
+    
 
     var entry = {
+      
       nombre: nombre.value,
       rfc: rfc.value,
       direccion: direccion.value,
       grado_estudio: grado_estudio.value,
       edad: edad.value,
       puesto: puesto.value,
+      hola:hola.value
     };
 
     fetch(`${window.origin}/actualizar_empleado/${idReg}`, {

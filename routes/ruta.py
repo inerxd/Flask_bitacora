@@ -81,21 +81,20 @@ def registro_empleado():
 
     
     dato_empleado0 = request.form['nombre']
-    
     dato_empleado1 = request.form['rfc']
     dato_empleado2 = request.form['direccion']
     dato_empleado3 = request.form['grado_estudio']
     dato_empleado4 = request.form['edad']
     dato_empleado5 = request.form['puesto']
-    
+    dato_empleado6 = request.form['id_empleado']
     
     
     me = Empleados(dato_empleado0,dato_empleado1,dato_empleado2,dato_empleado3,
-    dato_empleado4,dato_empleado5)
+    dato_empleado4,dato_empleado5,dato_empleado6)
     db.session.add(me)
     db.session.commit()
 
-    return redirect(url_for("ruta.acceso"))
+    return redirect(url_for("ruta.admin"))
 
 
 
@@ -152,21 +151,23 @@ def logout():
 @ruta.route("/actualizar_empleado/<id>",methods=['GET','PUT'])
 def actualizar_empleados(id):
     datos = Empleados.query.get(id)
+    email = Usuario.query.all()
     if request.method == "GET":
-        return render_template('auth/actulizar_empleados.html',datos=datos)
+        return render_template('auth/actulizar_empleados.html',datos=datos,email=email)
     
     req = request.get_json()
     try :
         if request.method == "PUT":
            
 
-            
+            datos.id_usuario = req['hola']
             datos.nombre = req['nombre']    
             datos.rfc = req['rfc']
             datos.direccion = req['direccion']    
             datos.grado_estudio = req['grado_estudio']
             datos.edad = req['edad']    
             datos.puesto = req['puesto']
+           
             
             db.session.commit()     
             return redirect(url_for("ruta.admin"))
