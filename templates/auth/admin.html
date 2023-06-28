@@ -108,7 +108,8 @@
                    <td>{{leg.Usuario.usuario}}</td>
                    <td>{{leg.dato_bitacora}}</td>
                    <td>{{leg.comentarios}}</td>
-
+                  <td><a class="btn btn-primary" class="nav-link" role="button" href="{{ url_for('ruta.actualizar_bitacora' , id= leg.id_bitacora)}}">Actualizar</a></td>
+                  <td><a class="btn btn-primary" class="nav-link" role="button" href="{{ url_for('ruta.Eliminar_bitacora' , id= leg.id_bitacora)}}">Eliminar</a></td>
             </tr>
             {% endfor %} 
          

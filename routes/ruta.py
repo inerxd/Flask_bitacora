@@ -1,17 +1,27 @@
 from flask import Blueprint, flash,render_template, request, url_for,redirect,flash,session,jsonify,make_response
+from app import socketio,emit
 #from flask_wtf.csrf import CSRFProtect
-from Models.date import Usuario
-from Models.date import Empleados
-from Models.date import Bitacora
-from Models.date import Tipo_User
+from Models.date import Usuario,Empleados,Bitacora,Tipo_User
 from db import db
 from static.dicionario import *
 
 
 
 
+
+
 ruta = Blueprint('ruta', __name__)
 #csrf = CSRFProtect()
+
+# notificaciones
+@socketio.on('event')
+def event(json):
+    print("Estamos de prueba"+json)
+    emit('event',json)
+
+@ruta.route("/notificaciones")
+def notificaciones():
+    return render_template ('noti.html')
 
 # rutas de normales
 @ruta.route("/")
@@ -196,6 +206,16 @@ def Eliminar_empleado(id):
 
 #1 rutas de bitacora 
 
+@ruta.route("/bit")
+def bit():
+    
+    if 'prueba' in session:
+        nombre_bitacora = Bitacora.query.all()
+        datos = Usuario.query.all()
+        return render_template ('auth/vistabit.html',nombre_bitacora=nombre_bitacora,datos=datos) 
+    else:
+        return redirect(url_for("ruta.acceso_al_sistema"))
+
 @ruta.route("/registro_bitacora",methods=['POST'])
 def registro_bitacora():
   
@@ -210,41 +230,38 @@ def registro_bitacora():
 
     return redirect(url_for("ruta.bit"))
 
+@ruta.route("/actualizar_bitacora/<id>",methods=['GET','PUT'])
+def actualizar_bitacora(id):
+    usuario = Usuario.query.all()
+    datos = Bitacora.query.get(id)
+    
+    if request.method == "GET":
+        return render_template('auth/actualizar_bitacora.html',datos=datos,usuario=usuario)
+    req = request.get_json()
+    if request.method == "PUT":
+        
+        datos.dato_bitacora = req['dato_bitacora']    
+        datos.comentarios = req['comentarios']
+        db.session.commit()
+        
+        return redirect(url_for("ruta.admin"))
+
+
 @ruta.route("/Eliminarbitacora/<id>")
 def Eliminar_bitacora(id):
     eliminar = Bitacora.query.get(id)
     db.session.delete(eliminar)
     db.session.commit()
 
-    return redirect(url_for("ruta.bitacora"))
+    return redirect(url_for("ruta.admin"))
 
-@ruta.route("/actualizar_bitacora/<id>",methods=['GET','POST'])
-def actualizar_bitacora(id):
-    datos = Bitacora.query.get(id)
-    if request.method == "POST":
-        
-        datos.dato_bitacora = request.form['dato_bitacora']    
-        datos.comentarios = request.form['comentarios']
-        db.session.commit()
-        
-        return redirect(url_for("ruta.bitacora"))
 
-    
-    return render_template('auth/actualizar_bitacora.html',datos=datos)
 
 @ruta.route("/porque")
 def porque():
     return render_template('porque.html')
 
-@ruta.route("/bit")
-def bit():
-    
-    if 'prueba' in session:
-        nombre_bitacora = Bitacora.query.all()
-        datos = Usuario.query.all()
-        return render_template ('auth/vistabit.html',nombre_bitacora=nombre_bitacora,datos=datos) 
-    else:
-        return redirect(url_for("ruta.acceso_al_sistema"))
+
 
 @ruta.route("/replazo")
 def replazo():
