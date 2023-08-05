@@ -1,0 +1,57 @@
+/* Estilos específicos para la página de actualizar */
+body {
+    background-color: #f8f9fa;
+  }
+  
+  .conteiner {
+    display: grid;
+    justify-content: center;
+    max-width: 400px;
+    margin: 50px auto; /* Centrar verticalmente y ajustar el margen */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+  }
+  
+  .icon {
+    display: flex;
+    justify-content: center;
+    margin: 1%;
+  }
+  
+  h1 {
+    text-align: center;
+  }
+  
+  .form-title {
+    text-align: center;
+  }
+  
+  .form-input {
+    margin-bottom: 10px;
+  }
+  
+  .form-input label {
+    display: inline-block; /* Mostrar el label en la misma línea */
+  }
+  
+  .password-input {
+    display: flex; /* Alinear el botón junto al campo de contraseña */
+    align-items: center; /* Centrar verticalmente los elementos en el div */
+  }
+  
+  .form-select {
+    display: flex;
+    justify-content: center;
+    width: 22%;
+    padding: 7px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-appearance: none; /* Eliminar la apariencia predeterminada de WebKit */
+    -moz-appearance: none; /* Eliminar la apariencia predeterminada de Gecko */
+    appearance: none; /* Eliminar la apariencia predeterminada de otros navegadores */
+    background-image: none; /* Eliminar la imagen de fondo */
+  }
+  
+  

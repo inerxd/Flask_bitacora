@@ -4,16 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ingresar Bitácora</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <style>
-    /* Estilos CSS personalizados */
-    body {
-      padding-top: 60px;
-    }
-    .container {
-      max-width: 500px;
-    }
-  </style>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for ('static' , filename ='css/bitacora.css')}}">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -21,16 +14,11 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Inicio</a>
-        </li>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav mb-2 mb-lg-0 ">
+       
         <li class="nav-item">
-          <a class="nav-link" href="#">Bitácora</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href=/logout>Salir</a>
+          <a  class="nav-link active " href=/logout>Salir</a>
         </li>
       </ul>
     </div>
@@ -41,24 +29,66 @@
     <form action="/registro_bitacora" method="post">
       <div class="form-group">
         <label for="contenido">Contenido:</label>
-        <textarea class="form-control" id="contenido" name="dato_bitacora" rows="5" placeholder="Ingrese el contenido"></textarea>
+        <textarea class="form-control" id="contenido" name="dato_bitacora" rows="5" placeholder="Ingrese la bitacora"></textarea>
       </div>
       <div class="form-group">
         <label for="comentarios">Comentarios:</label>
-        <textarea class="form-control" id="comentarios" rows="3" name="comentarios" placeholder="Ingrese comentarios adicionales"></textarea>
+        <textarea class="form-control" id="comentarios" rows="5" name="comentarios" placeholder="Ingrese comentarios adicionales"></textarea>
       </div>
-      <div class="form-group">
-       
-          <input type="hidden" class="form-control" id="id" name="id"  maxlength="120"
-          value="{{datos[0].id_usuario}}"  />
-     
-      </div>
-      <button type="submit" class="btn btn-primary">Guardar</button>
+    <div class="form-floating">
+      <input type="hidden" class="form-control" id="id" name="id" value="{{ usuario.id_usuario }}"/>
+    </div>
+    <div style="display: flex ;justify-content: center;">
+      <button style="margin: 3%;" type="submit" class="btn btn-primary">Guardar</button>
+    </div>
     </form>
+    <br>
   </div>
 
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <div>
+    <table id="myTablebit" class="table table-striped" style="width:100%">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th style="text-align: center;">bitacora</th>
+          <th style="text-align: center;">comentario</th>
+          <th style="text-align: center;">Funciones</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        {% for bita in dato_bit %}
+        {% if bita.usuario == session.get('id_usuario')%}
+        <tr>
+          <td style="text-align: center;">{{ loop.index }}</td>
+          <td style="text-align: center;width: 60%;">{{bita.dato_bitacora}}></td>
+          <td style="text-align: center;width: 40%;">{{bita.comentarios}}</td>
+          <td>
+            <div style="display:flex;justify-content: center;">
+              <a class="btn btn-primary" style="margin: 1%;" class="nav-link" role="button"
+                href="{{ url_for('ruta.actualizar_bitacora', id=bita.id_bitacora) }}">Actualizar</a>
+              <a class="btn btn-primary" style="margin: 1%;" class="nav-link" role="button"
+                href="{{ url_for('ruta.Eliminar_bitacora', id=bita.id_bitacora) }}">Eliminar</a>
+            </div>
+          </td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+      </tbody>
+    </table>
+
+  </div>
+    
+
+    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+    integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+  <script src="{{url_for('static',filename='js/tabla_bitacora.js')}}"></script>
 </body>
 </html>

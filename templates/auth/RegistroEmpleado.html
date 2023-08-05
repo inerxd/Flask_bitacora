@@ -2,84 +2,75 @@
 {% block title %}Registro Empleado{% endblock %}
 
 {% block customCSS %}
-<link rel="stylesheet" href="{{ url_for ('static' , filename='css/estilosForm.css')}}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/registro_empleado.css') }}">
 {% endblock %}
 
 {% block body %}
 
-<div class="estilos">
-
+<div class="container form-container">
   <form class="form-signin" name="myForm" action="/empleado" method="post">
-    <div class="icono">
-      <img class="mb-4" src="{{ url_for ('static' , filename ='img/logo.svg')}}" alt="" width="72" height="57">
-    </div>
-    <div class="empleado">
-      <h1 class="h3 mb-3 fw-normal">Registro de empleados</h1>
-    </div>
+    
+    
     <div class="row">
-      <div class="col-5" class="estilo">
-        <div class="form-floating">
-          <!--<input type="hidden" name="csrf_token" value="{{csrf_token}}">-->
+      <div class="col-12 text-center mb-4">
+        <img class="img-fluid" src="{{ url_for('static', filename='img/logo.svg') }}" alt="" width="72" height="57" />
+      </div>
+    </div>
+    
+    
+    
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <div class="form-group">
+          <label for="nombre">Nombre del empleado:</label>
           <input type="text" class="form-control" id="nombre" name="nombre" placeholder="javier lopez" required>
-          <label for="floatingInput">Nombre del empleado</label>
         </div>
       </div>
 
-      <div class="col-5" class="estilo">
-        <div class="form-floating">
-          <input type="text" class="form-control" id="rfc" name="rfc" placeholder="slop789" minlength="8"
-            maxlength="120" required>
-          <label for="floatingPassword">RFC del empleado</label>
-        </div>
-      </div>
-    </div>
-
-
-
-    <div class="row">
-      <div class="col-5">
-        <div class="form-floating">
-          <input type="text" class="form-control" id="direccion" name="direccion" placeholder="centro avenida 15"
-            maxlength="120" required>
-          <label for="floatingPassword">Direccion del empleado</label>
-        </div>
-      </div>
-
-
-
-      <div class="col-5" class="estilo">
-        <div class="form-floating">
-          <input type="text" class="form-control" id="grado_estudio" name="grado_estudio"
-            placeholder="licencitura concluida" maxlength="120" required>
-          <label for="floatingPassword">Grado de estudio del empleado</label>
+      <div class="col-12 col-md-6">
+        <div class="form-group">
+          <label for="rfc">RFC del empleado:</label>
+          <input type="text" class="form-control" id="rfc" name="rfc" placeholder="slop789" minlength="8" maxlength="120" required>
         </div>
       </div>
     </div>
 
     <div class="row">
-      <div class="col-5" class="estilo">
-        <div class="form-floating">
+      <div class="col-12 col-md-6">
+        <div class="form-group">
+          <label for="direccion">Dirección del empleado:</label>
+          <input type="text" class="form-control" id="direccion" name="direccion" placeholder="centro avenida 15" maxlength="120" required>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6">
+        <div class="form-group">
+          <label for="grado_estudio">Grado de estudio del empleado:</label>
+          <input type="text" class="form-control" id="grado_estudio" name="grado_estudio" placeholder="licenciatura concluida" maxlength="120" required>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <div class="form-group">
+          <label for="edad">Edad del empleado:</label>
           <input type="number" class="form-control" id="edad" name="edad" placeholder="35" maxlength="120" required>
-          <label for="floatingPassword">Edad del empleado</label>
         </div>
       </div>
 
-      <div class="col-5" class="estilo">
-        <div class="form-floating">
-          <input type="text" class="form-control" id="puesto" name="puesto" placeholder="desarrollador de sadi"
-            maxlength="120" required>
-          <label for="floatingPassword">Puesto del empleado</label>
+      <div class="col-12 col-md-6">
+        <div class="form-group">
+          <label for="puesto">Puesto del empleado:</label>
+          <input type="text" class="form-control" id="puesto" name="puesto" placeholder="desarrollador de sadi" maxlength="120" required>
         </div>
       </div>
-      <div class="col">
-        <div class="form-floating">
-          <input type="hidden" class="form-control" name="id_email" value="{{id_email[0].id_usuario}}" />
-        </div>
-      </div>
-      
-      <div class="col">
-        <div class="form-floating">
-          <label for="tipo_usuario">Seleciones el Correo del Empleado:</label>
+    </div>
+
+    <div class="row">
+      <div class="col-12 col-md-6 offset-md-3">
+        <div class="form-group">
+          <label for="tipo_usuario">Selecciona el Correo del Empleado:</label>
           <select name="id_empleado" id="id_empleado">
             {% for email in id_email %}
             <option value="{{ email.id_usuario }}">{{ email.usuario }}</option>
@@ -87,24 +78,19 @@
           </select>
         </div>
       </div>
-
     </div>
 
-
-
-
-    <button class="btn btn-primary" type="submit" style="margin-left: 450px;">Enviar Datos</button>
-
+    <div class="row">
+      <div class="col-12 col-md-6 offset-md-3">
+        <button class="btn btn-primary" type="submit">Enviar Datos</button>
+      </div>
+    </div>
   </form>
-
 </div>
-
 
 
 {% block customJS %}
 
 {% endblock %}
-
-
 
 {% endblock %}

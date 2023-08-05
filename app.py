@@ -1,9 +1,8 @@
 from flask import Flask
 from flask_socketio import SocketIO,emit
-
 from werkzeug.exceptions import BadRequest
-from flask_sqlalchemy import SQLAlchemy
 from db import db 
+
 
 
 #from flask_wtf.csrf import CSRFProtect
@@ -15,6 +14,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:padreDIOS1@localh
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
+
 
 from routes.ruta import ruta
 app.register_blueprint(ruta)

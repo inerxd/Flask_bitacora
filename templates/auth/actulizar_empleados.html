@@ -1,134 +1,77 @@
-{% extends './layaut.html' %} {% block title %}Actualizar empleados{% endblock
+{% extends './Form.html' %} {% block title %}Actualizar empleados{% endblock
 %} {% block customCSS %}
-<link rel="stylesheet" href="{{ url_for ('static' , filename='css/login.css')}}" />
+<link rel="stylesheet" href="{{ url_for ('static' , filename='css/actualizar_empleado.css')}}">
 {% endblock %} {% block body %}
-
-<!--<form class="form-signin"  name="myForm" action="/actualizar_empleado/{{datos.id_empleado}}" method="POST" id="form">-->
-
-<img class="mb-4" src="{{ url_for ('static' , filename ='img/logo_sigsa.svg')}}" alt="" width="72" height="57" />
-<h1 class="h3 mb-3 fw-normal">Actualizar los datos del empleado</h1>
-<div class="row">
-  <div class="col">
-    <div class="form-floating">
-      <input type="text" class="form-control" id="nombre" name="nombre" placeholder="javier lopez"
-        value="{{datos.nombre}}" required />
-    </div>
-  </div>
-
+<div class="container ">
   
+    <img class="mb-4" src="{{ url_for('static', filename='img/logo.svg') }}" alt="" width="72" height="57" />
+    <h1 class="h3 mb-3 fw-normal">Actualizar los datos del empleado</h1>
 
-  <div class="col">
-    <div class="form-floating">
-      <input type="text" class="form-control" id="rfc" name="rfc" placeholder="slop789" minlength="8" maxlength="120"
-        value="{{datos.rfc}}" required />
+    <div class="row">
+      <div class="col-5 estilo">
+        <div class="form-floating">
+          <input type="text" class="form-control form-control" id="nombre"  value="{{ datos.nombre }}" required />
+          <label for="nombre">Nombre</label>
+        </div>
+      </div>
+
+      <div class="col-5 estilo">
+        <div class="form-floating">
+          <input  type="text" class="form-control form-control" id="rfc"  value="{{ datos.rfc }}" required />
+          <label for="rfc">RFC</label>
+        </div>
+      </div>
     </div>
-  </div>
+
+    <div class="row">
+      <div class="col-5 estilo">
+        <div class="form-floating">
+          <input type="text" class="form-control" id="direccion"  value="{{ datos.direccion }}" required />
+          <label for="direccion">Dirección</label>
+        </div>
+      </div>
+
+      <div class="col-5 estilo">
+        <div class="form-floating">
+          <input type="text" class="form-control" id="grado_estudio"  value="{{ datos.grado_estudio }}" required />
+          <label for="grado_estudio">Grado de Estudio</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-5 estilo">
+        <div class="form-floating">
+          <input type="number" class="form-control" id="edad" value="{{ datos.edad }}" required />
+          <label for="edad">Edad</label>
+        </div>
+      </div>
+
+      <div class="col-5 estilo">
+        <div class="form-floating">
+          <input type="text" class="form-control" id="puesto"  value="{{ datos.puesto }}" required />
+          <label for="puesto">Puesto</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-floating">
+      <input type="hidden" class="form-control" id="id"   value="{{ datos.id_empleado }}" required />
+    </div>
+ 
+    <div class="text-center">
+      <button  onclick="submit_entry()">Enviar Datos</button>
+    </div>
+
+   
+  
 </div>
 
-<div class="row">
-  <div class="col">
-    <div class="form-floating">
-      <input type="text" class="form-control" id="direccion" name="direccion" placeholder="centro avenida 15"
-        maxlength="120" value="{{datos.direccion}}" required />
-    </div>
-  </div>
-
-  <div class="col">
-    <div class="form-floating">
-      <input type="text" class="form-control" id="grado_estudio" name="grado_estudio"
-        placeholder="licencitura concluida" maxlength="120" value="{{datos.grado_estudio}}" required />
-    </div>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col">
-    <div class="form-floating">
-      <input type="number" class="form-control" id="edad" name="edad" placeholder="35" maxlength="120"
-        value="{{datos.edad}}" required />
-    </div>
-  </div>
-
-  <div class="col">
-    <div class="form-floating">
-      <input type="text" class="form-control" id="puesto" name="puesto" placeholder="desarrollador de sadi"
-        maxlength="120" value="{{datos.puesto}}" required />
-    </div>
-  </div>
-
-  <div class="col">
-    <div class="form-floating">
-      <label for="tipo_usuario">Seleciones el Correo del Empleado:</label>
-      <select  id="hola">
-        {% for dato in email %}
-        <option value="{{ dato.id_usuario }}">{{ dato.usuario }}</option>
-        {% endfor %}
-      </select>
-    </div>
-  </div>
-
-  <div class="col">
-    <div class="form-floating">
-      <input type="hidden" class="form-control" id="id" name="id" placeholder="desarrollador de sadi" maxlength="120"
-        value="{{datos.id_empleado}}" required />
-    </div>
-  </div>
-</div>
-
-<div>
-  <!-- Esto es un comentario  <button class="w-100 btn btn-lg btn-primary"  type="submit" id="enviar">Enviar Datos</button>-->
-  <button class="btn btn-primary" onclick="submit_entry()">enviar datos</button>
-  <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
-</div>
 {% block customJS %}
 
 <script src="{{ url_for('static',filename='js/login.js') }}"></script>
+<script src="{{ url_for('static',filename='js/uptade_Empleado.js') }}"></script>
 
-{% endblock %} {% block script %}
-<script>
-  function submit_entry() {
-    var id = document.getElementById("id");
-    var idReg = id.value;
-    var hola = document.getElementById("hola");
-    var nombre = document.getElementById("nombre");
-    var rfc = document.getElementById("rfc");
-    var direccion = document.getElementById("direccion");
-    var grado_estudio = document.getElementById("grado_estudio");
-    var edad = document.getElementById("edad");
-    var puesto = document.getElementById("puesto");
-    
+{% endblock %} 
 
-    var entry = {
-      
-      nombre: nombre.value,
-      rfc: rfc.value,
-      direccion: direccion.value,
-      grado_estudio: grado_estudio.value,
-      edad: edad.value,
-      puesto: puesto.value,
-      hola:hola.value
-    };
-
-    fetch(`${window.origin}/actualizar_empleado/${idReg}`, {
-      method: "PUT",
-      credentials: "include",
-      body: JSON.stringify(entry),
-      cache: "no-cache",
-      headers: new Headers({
-        "content-type": "application/json",
-      }),
-    })
-      .then(function (response) {
-        if (response.ok) {
-          window.location.replace("http://localhost:5000/admin");
-          return;
-        }
-        throw new Error("Error en la respuesta de red");
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
-</script>
-
-{% endblock %} {% endblock %}
+{% endblock %}

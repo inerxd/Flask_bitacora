@@ -1,81 +1,37 @@
-{% extends './layaut.html' %}
+{% extends './Form.html' %}
 {% block title %}Bitacora{% endblock %}
 {% block customCSS %}
-<link rel="stylesheet" href="{{ url_for ('static' , filename='css/login.css')}}">
+<link rel="stylesheet" href="{{ url_for ('static' , filename='css/actualizar_bitacora.css')}}">
 {% endblock %}
 
-
 {% block body %}
-    <img class="mb-4" src="{{ url_for ('static' , filename ='img/logo_sigsa.svg')}}" alt="" width="72" height="57">
-    <h1 class="h3 mb-3 fw-normal">Registro de bitacora</h1>
+    <div class="conteiner">
+        <img class="form-floating" src="{{ url_for ('static' , filename ='img/logo.svg')}}" alt="" width="72" height="57">
+        <h1 class="form-floating">actualizar bitacora</h1>
 
-    <div class="form-floating">
-        <textarea class="form-control" id="dato_bitacora"  rows="5" placeholder="Ingrese el contenido" value ="{{datos.dato_bitacora}}"></textarea>
-        <label for="floatingInput">actualizar bitacora</label> 
-     
-    </div>
-    
-    <div class="form-floating">
-        <textarea class="form-control" id="comentarios"  rows="5" placeholder="Ingrese el contenido" value ="{{datos.comentarios}}"></textarea>
-        <label for="floatingPassword">comentarios</label>
-    </div>
-
-    <div class="col">
-        <div class="form-floating">
-          <input type="hidden" class="form-control" id="id" placeholder="desarrollador de sadi" maxlength="120"
-            value="{{datos.id_bitacora}}"  />
+        <!-- Div que contiene el label y el textarea para actualizar bitácora -->
+        <div class="form-group">
+            <label class="form-floating">actualizar bitacora</label> 
+            <textarea class="form-control area" id="dato_bitacora"  rows="4" >{{datos.dato_bitacora}}</textarea>
         </div>
-      </div>
 
-    <div class="checkbox mb-3">
-        <button class="btn btn-primary"  onclick="submit_entry()" >enviar datos</button>
-        <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
-      
-    </div>
-    
-  {% block customJS %}
-  <script src="{{ url_for('static',filename='js/login.js') }}"></script>
-  {% endblock %}
-  {% block script %}
-  <script>
-    function submit_entry(){
+        <!-- Div que contiene el label y el textarea para comentarios -->
+        <div class="form-group">
+            <label class="form-floating">comentarios</label>
+            <textarea class="form-control area" id="comentarios"  rows="4" placeholder="Ingrese el contenido" >{{datos.comentarios}}</textarea>
+        </div>
 
-          
-          var id = document.getElementById('id');
-          var idReg = id.value;
-          var dato_bitacora = document.getElementById('dato_bitacora');
-          var comentarios = document.getElementById('comentarios');
-         
-          
+        <div class="form-floating">
+            <input type="hidden" class="form-control" id="id" value="{{datos.id_bitacora}}" />
+        </div>
+
+        <div class="checkbox mb-3">
+            <button class="btn btn-primary"  onclick="submit_entry()">enviar datos</button>
            
-        var entry = {
-          
-          dato_bitacora: dato_bitacora.value,
-          comentarios: comentarios.value,
-         
-                 };
-          console.log(entry);
-          fetch(`${window.origin}/actualizar_bitacora/${idReg}`,{
-            method: "PUT",
-            credentials: "include",
-            body:JSON.stringify(entry),
-            cache: "no-cache",
-            headers: new Headers({
-              "content-type": "application/json"
-            })
-          })
-          .then(function(response) {
-        if(response.ok) {
-            window.location.replace("http://localhost:5000/admin");
-            return;
-        }
-        throw new Error("Error en la respuesta de red");
-    }).catch(function(error) {
-        console.log(error);
-    });
-         
-    }
-  
-  </script>
-  {% endblock %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block customJS %}
+<script src="{{ url_for('static',filename='js/uptade_bitacora.js') }}"></script>
 {% endblock %}

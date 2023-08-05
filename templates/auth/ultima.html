@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ultima</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{ url_for ('static' , filename ='css/ultima.css')}}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
+</head>
+
+<body>
+  <!-- Sidebar-->
+  <div class="main-container d-flex">
+    <div class="sidebar" id="side_nav">
+      <div class="header-box px-2 pt-3 pb-4 d-flex justify-content-between">
+        <h1 class="fs-4"><span class="bg-white text-dark rounded shadow px-2 me-2"><!-- texto aqui-->DA</span><span
+            class="text-white"><!--texto aqui-->dashboard</span></h1>
+        <button class="btn d-md-none d-block close-btn px-1 py-0 text-white"><i
+            class="fa-solid fa-bars-staggered"></i></button>
+      </div>
+      <ul class="list-unstyled px-2">
+        <li class="active"><a href="{{ url_for('ruta.registro')}}" class="text-decoration-none px-3 py-2 d-block"><i
+              class="fa-regular fa-envelope"></i>
+            Registro de email</a></li>
+        <li class=""><a href="{{ url_for('ruta.RegistroE')}}" class="text-decoration-none px-3 py-2 d-block" ><i
+              class="fa-solid fa-database"></i>
+            Registro de los empleados</a></li>
+      </ul>
+
+      <hr class="h-color mx-2">
+
+      <ul class="list-unstyled px-2">
+        <li><a href="{{ url_for('ruta.logout')}}" class="text-decoration-none px-3 py-2 d-block"><i
+              class="fa-solid fa-door-closed"></i>
+            Cerra session</a></li>
+      </ul>
+
+    </div>
+
+    <div class="content">
+      <!-- El menu-->
+      <nav class="navbar navbar-expand-md navbar-light bg-light">
+        <div class="container-fluid">
+          <div class="d-flex justify-content-between d-md-none d-block">
+            <button class="btn px-1 py-0 open-btn me-2"><i class="fa-solid fa-bars-staggered"></i></button>
+            <a class="navbar-brand fs-4" href="#"><span class="bg-dark rounded px-2 py-0 text-white ">Ultmima
+                dance</span></a>
+
+          </div>
+
+          <button class="navbar-toggler p-0 border-0" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <i class="fa-solid fa-list"></i>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+            <ul class="navbar-nav  mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">profile</a>
+              </li>
+            </ul>
+
+
+
+          </div>
+        </div>
+      </nav>
+
+      <!--contenido principal -->
+
+      <div class="dashboard-content expandir">
+        <!-- Pestañas-->
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
+              role="tab" aria-controls="home" aria-selected="true">Email</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
+              role="tab" aria-controls="profile" aria-selected="false">Datos de los empleados</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button"
+              role="tab" aria-controls="contact" aria-selected="false">Bitacora</button>
+          </li>
+        </ul>
+
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <!-- Contenido de la pestaña Home -->
+            <!-- Tablas-->
+            <table id="myTable" class="display">
+              <thead>
+                <tr>
+                  <th style="text-align: center;">#</th>
+                  <th style="text-align: center;">Correos</th>
+                  <th style="text-align: center;">Contraseña</th>
+                  <th style="text-align: center;">Tipo de usuario</th>
+                  <th style="text-align: center;">Funciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for leg in user %}
+                <tr>
+                  <td style="text-align: center;">{{loop.index}}</td>
+                  <td style="text-align: center;">{{leg.usuario}}</td>
+                  <td style="text-align: center;">{{leg.password}}</td>
+                  <td style="text-align: center;">{{ leg.Tipo_User.tipo_usuarios }}</td>
+                  <td>
+                    <div class="botones">
+                      <a class="btn btn-primary" style="margin: 1%;" class="nav-link" role="button"
+                        href="{{ url_for('ruta.actualizar' , id= leg.id_usuario)}}">Actualizar</a>
+                      <button class="btn btn-primary" style="margin: 1%;" onclick="eliminarEmail('{{leg.id_usuario}}' )">Eliminar</button>
+                     
+                    </div>
+                  </td>
+
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+
+
+
+          </div>
+          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <table id="myTable2" class="display">
+              <thead>
+
+                <tr>
+                  <th style="text-align: center;">#</th>
+                  <th style="text-align: center;">Nombre</th>
+                  <th style="text-align: center;">Usuario</th>
+                  <th style="text-align: center;">Rfc</th>
+                  <th style="text-align: center;">Direccion</th>
+                  <th style="text-align: center;">Grado de estudio</th>
+                  <th style="text-align: center;">edad</th>
+                  <th style="text-align: center;">puesto</th>
+                  <th style="text-align: center;">Funciones</th>
+                </tr>
+
+              </thead>
+              <tbody>
+                {% for informacion in datos_empleado %}
+                <tr>
+                  <td style="text-align: center;">{{loop.index}}</td>
+                  <td style="text-align: center;">{{informacion.nombre}}</td>
+                  <td style="text-align: center;">{{informacion.Usuario.usuario}}</td>
+                  <td style="text-align: center;">{{informacion.rfc}}</td>
+                  <td style="text-align: center;">{{informacion.direccion}}</td>
+                  <td style="text-align: center;">{{informacion.grado_estudio}}</td>
+                  <td style="text-align: center;">{{informacion.edad}}</td>
+                  <td style="text-align: center;">{{informacion.puesto}}</td>
+                  <td>
+                    <div class="botones"><a class="btn btn-primary" style="margin: 1%;" class="nav-link" role="button"
+                        href="{{ url_for('ruta.actualizar_empleados' , id= informacion.id_empleado)}}">Actualizar</a>
+                        
+                        <button class="btn btn-primary" style="margin: 1%;" onclick="eliminarEmpleado('{{informacion.id_empleado}}' )">Eliminar</button>
+                       
+                    </div>
+                  </td>
+
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+            <table id="myTable3" class="table table-striped" style="width:100%">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th style="text-align: center;">Nombre</th>
+                  <th style="text-align: center;">bitacora</th>
+                  <th style="text-align: center;">comentario</th>
+                  <th style="text-align: center;">Funciones</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                {% for bitacora in bit %}
+                <tr>
+                  <td style="text-align: center;">{{ loop.index }}</td>
+                  <td style="text-align: center;">{{ bitacora.Usuario.usuario }}</td>
+                  <td style="text-align: center;width: 100%;">{{bitacora.dato_bitacora}}></td>
+                  <td style="text-align: center;width: 100%;">{{bitacora.comentarios}}</td>
+                  <td>
+                    <div class="botones">
+                      <a class="btn btn-primary" style="margin: 1%;" class="nav-link" role="button"
+                        href="{{ url_for('ruta.actualizar_bitacora', id=bitacora.id_bitacora) }}">Actualizar</a>
+                        <button class="btn btn-primary" style="margin: 1%;" onclick="eliminarBitacora('{{bitacora.id_bitacora}}' )">Eliminar</button>
+                       
+                    </div>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+
+
+
+      </div>
+
+    </div>
+
+
+  </div>
+  <!-- Footer -->
+  <footer class="text-center text-lg-start bg-light text-muted">
+    <!-- Section: Social media -->
+    <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+      <!-- Left -->
+      <div class="me-5 d-none d-lg-block">
+        <span>Redes de ?:</span>
+      </div>
+      <!-- Left -->
+
+      <!-- Right -->
+      <div>
+        <a href="https://www.facebook.com/" class="me-4 text-reset">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://twitter.com/" class="me-4 text-reset">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="https://www.youtube.com/" class="me-4 text-reset">
+          <i class="fa-brands fa-youtube"></i>
+        </a>
+        <a href="https://www.instagram.com/" class="me-4 text-reset">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://www.linkedin.com/" class="me-4 text-reset">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://github.com/inerxd?tab=repositories" class="me-4 text-reset">
+          <i class="fa-brands fa-square-github"></i>
+        </a>
+      </div>
+      <!-- Right -->
+    </section>
+    <!-- Section: Social media -->
+
+    <!-- Section: Links  -->
+
+
+    <!-- Copyright -->
+    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+      © 2022-2023 Copyright:
+      <a class="text-reset fw-bold">Enterprise Javier</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+    integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+  <script src="{{ url_for('static',filename='js/ultima.js') }}"></script>
+  <script src="{{url_for('static',filename='js/tabla_crud.js')}}"></script>
+  <script src="{{url_for('static',filename='js/delete_general.js')}}"></script>
+</body>
+
+</html>

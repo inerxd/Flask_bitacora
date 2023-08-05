@@ -1,0 +1,46 @@
+/* Estilos generales */
+.conteiner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; /* Asegura que el contenedor ocupe al menos la altura de la pantalla */
+  padding: 20px; /* Agrega un poco de espaciado alrededor del contenido */
+}
+
+.form-floating {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 1%;
+}
+
+/* Estilos para los textarea */
+.conteiner textarea {
+  width: 600px;
+  min-height: 220px;
+  resize: vertical;
+}
+
+/* Estilos para los labels */
+.conteiner label {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+/* Estilos para el div que contiene el label y el textarea */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem; /* Agrega un poco de espacio entre los campos */
+}
+
+/* Estilos para el h1 */
+.conteiner h1 {
+  text-align: center;
+  margin-bottom: 2rem; /* Ajusta el espacio entre el h1 y los elementos siguientes */
+}

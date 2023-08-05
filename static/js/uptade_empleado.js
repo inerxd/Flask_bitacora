@@ -1,28 +1,44 @@
 
-function send_put(){
-    fetch('http://localhost:5000/actualizar_empleado/{{datos.id_empleado}}',{
-        method: 'PUT',
-        body:JSON.stringify({
-             nombre : document.getElementById('id').value,
-             rfc : document.getElementById('rfc').value,
-             direccion : document.getElementById('direccion').value,
-             grado_estudio : document.getElementById('grado_estudio').value,
-             edad : document.getElementById('edad').value,
-             puesto : document.getElementById('puesto').value
-           
-        })
-
-    })
-    .then(response =>response.json())
-    .then(data =>console.log(data))
-}
-    const nombre = document.getElementById('id').value;
-    const rfc = document.getElementById('rfc').value;
-    const direccion = document.getElementById('direccion').value;
-    const grado_estudio = document.getElementById('grado_estudio').value;
-    const edad = document.getElementById('edad').value;
-    const puesto = document.getElementById('puesto').value;
-
+  function submit_entry() {
+    var id = document.getElementById("id");
+    var idReg = id.value;
+    
+    var nombre = document.getElementById("nombre");
+    var rfc = document.getElementById("rfc");
+    var direccion = document.getElementById("direccion");
+    var grado_estudio = document.getElementById("grado_estudio");
+    var edad = document.getElementById("edad");
+    var puesto = document.getElementById("puesto");
     
 
+    var entry = {
+      
+      nombre: nombre.value,
+      rfc: rfc.value,
+      direccion: direccion.value,
+      grado_estudio: grado_estudio.value,
+      edad: edad.value,
+      puesto: puesto.value,
 
+    };
+
+    fetch(`${window.origin}/actualizar_empleado/${idReg}`, {
+      method: "PUT",
+      credentials: "include",
+      body: JSON.stringify(entry),
+      cache: "no-cache",
+      headers: new Headers({
+        "content-type": "application/json",
+      }),
+    })
+      .then(function (response) {
+        if (response.ok) {
+          window.location.replace("http://localhost:5000/admin");
+          return;
+        }
+        throw new Error("Error en la respuesta de red");
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }

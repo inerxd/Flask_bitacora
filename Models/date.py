@@ -11,11 +11,10 @@ class Usuario (db.Model):
     password = db.Column(db.String(102), unique=True, nullable=False)
 
     
-    def __init__(self,usuario,password,id_tipo_usuario,id_empleado):
+    def __init__(self,usuario,password,id_tipo_usuario):
         self.usuario = usuario
         self.password = password
-        self.id_tipo_usuario = id_tipo_usuario
-        self.id_empleado = id_empleado       
+        self.id_tipo_usuario = id_tipo_usuario    
 class Empleados (db.Model):
     __tablename__ = 'empleados'
     id_empleado = db.Column(db.Integer, primary_key=True,nullable=False)

@@ -1,36 +1,43 @@
 {% extends './layaut.html' %} {% block title %}Registro{% endblock %} {% block
-customCSS %}
-<link rel="stylesheet" href="{{ url_for ('static' , filename='css/login.css')}}" />
-{% endblock %} {% block body %}
+  customCSS %}
+  <link rel="stylesheet" href="{{ url_for ('static' , filename='css/login.css')}}" />
+  {% endblock %} {% block body %}
+  
+  <form class="form-signin" name="myForm" action="/Datos" method="POST">
+    <img class="mb-4" src="{{ url_for ('static' , filename ='img/logo.svg')}}" alt="" width="72" height="57" />
+    <h1 class="h3 mb-3 fw-normal">Registro de correo</h1>
+  
+    <div class="form-floating">
+      <input type="hidden" name="csrf_token" value="{{csrf_token}}" />
+      <input type="email" class="form-control" id="email" name="usuario" placeholder="name@example.com" required />
+      <label for="floatingInput">Email address</label>
+    </div>
+    <div class="input-group mb-3">
+      <input type="password" class="form-control form-control-md" id="password" name="password" placeholder="password" minlength="6"
+        maxlength="120" required />
+        <button  class="btn-lg btn-light" style="margin: 1%;"  type="button" onclick="mostrarOcultarContrasena()">
+          <span id="iconoMostrarOcultar" ><i class="fas fa-eye"></i></span> 
+        </button>
+    </div>
 
-<form class="form-signin" name="myForm" action="/Datos" method="post">
-  <img class="mb-4" src="{{ url_for ('static' , filename ='img/logo_sigsa.svg')}}" alt="" width="72" height="57" />
-  <h1 class="h3 mb-3 fw-normal">Registro de correo</h1>
-
-  <div class="form-floating">
-    <input type="hidden" name="csrf_token" value="{{csrf_token}}" />
-    <input type="email" class="form-control" id="email" name="usuario" placeholder="name@example.com" required />
-    <label for="floatingInput">Email address</label>
-  </div>
-  <div class="form-floating">
-    <input type="password" class="form-control" id="password" name="password" placeholder="password" minlength="6"
-      maxlength="120" required />
-    <label for="floatingPassword">Password</label>
-  </div>
-  <div class="form-floating">
-    <label for="tipo_usuario">Tipo de usuario:</label>
-    <select name="id_tipo_usuario" id="tipo_usuario">
+  <div class="form-floating" style="margin: 5%;">
+  <div class="row">
+    <div class="col">
+      <label for="tipo_usuario">Tipo de usuario:</label>
+    </div>
+    <div class="col">
+      <select name="id_tipo_usuario" id="tipo_usuario">
         {% for tipos_usuario in tipo_usuario %} 
         <option value="{{ tipos_usuario.id }}">{{ tipos_usuario.tipo_usuarios }}</option>
         {% endfor %}
-    </select>
+      </select>
+    </div>
+  </div>
 </div>
-
-  <br>
-  <br>
-  <button class="w-100 btn btn-lg btn-primary" type="submit">Registro</button>
-  <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
-</form>
-{% block customJS %}
-<script src="{{ url_for('static',filename='js/login.js') }}"></script>
-{% endblock %} {% endblock %}
+    <button class="w-100 btn btn-lg btn-primary" type="submit" style="margin: 2%;">Registro</button>
+    
+  </form>
+  {% block customJS %}
+  <script src="{{ url_for('static',filename='js/login.js') }}"></script>
+  <script src="{{ url_for('static',filename='js/visualizar_password.js') }}"></script>
+  {% endblock %} {% endblock %}
