@@ -6,6 +6,9 @@ function submit_entry(){
     var usuario = document.getElementById('usuario');
     var password = document.getElementById('password');
     var tipo_usuario = document.getElementById('tipo_usuario')
+    var adminUrl = document.getElementById('data-url').getAttribute('data-admin-url');
+
+
     
      
   var entry = {
@@ -26,7 +29,7 @@ function submit_entry(){
     })
     .then(function(response) {
   if(response.ok) {
-      window.location.replace("{{ url_for('ruta.admin') }}");
+      window.location.replace(adminUrl);
       return;
   }
   throw new Error("Error en la respuesta de red");

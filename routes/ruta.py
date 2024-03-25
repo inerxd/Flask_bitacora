@@ -1,6 +1,5 @@
 from flask import Blueprint, flash, render_template, request, url_for, redirect, flash, session, jsonify, make_response
-from app import socketio, emit
-
+#from app import socketio, emit
 # from flask_wtf.csrf import CSRFProtect
 from Models.date import Usuario, Empleados, Bitacora, Tipo_User
 from db import db
@@ -13,27 +12,27 @@ ruta = Blueprint('ruta', __name__)
 
 # notificaciones
 
-
+"""
 @socketio.on('event')
 def event(json):
     print("Estamos de prueba"+json)
-    emit('event', json)
-
+    emit('event', json) 
+"""
 
 @ruta.route("/notificaciones")
 def notificaciones():
     return render_template('noti.html')
 
-# rutas de normales
-
+#Rutas_del_FrontEnd
 
 @ruta.route("/")
 def principal():
-    return render_template('index.html')
+    return render_template('FrontEnd/index.html')
 
 @ruta.route("/porque")
 def porque():
-    return render_template('porque.html')
+    return render_template('FrontEnd/porque.html')
+
 # funcion de session
 def verificar_sesion():
     return 'prueba' in session
@@ -166,14 +165,18 @@ def Eliminar_empleado(id):
         return redirect(url_for("ruta.admin"))
     else:
         return render_template('mensaje.html')
-
-
-# Login
-@ruta.route("/acceso", methods=['GET', 'POST', 'PUT',"DELETE"])
-def acceso_al_sistema():
+@ruta.route("/entrar")
+def entrar():
     datos = Usuario.query.all()
     if request.method == 'GET':
-        return render_template('auth/login.html',datos=datos)
+        return render_template('login.html',datos=datos)
+
+# Login
+@ruta.route("/acceso", methods=['GET', 'POST'])
+def acceso_al_sistema():
+   
+    if request.method == 'GET':
+        return render_template('FrontEnd/login.html')
 
     name = request.form['usuario']
     name2 = request.form['password']
@@ -228,7 +231,7 @@ def bit():
                 dato_bit = Bitacora.query.all()
                 usuario = Usuario.query.get(id_usuario)
             
-                return render_template("auth/vistabit.html",usuario=usuario,dato_bit=dato_bit)
+                return render_template("auth/pagina_Bitacora.html",usuario=usuario,dato_bit=dato_bit)
         else:
             return render_template('mensaje.html')
 

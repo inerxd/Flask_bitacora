@@ -5,6 +5,7 @@ function submit_entry() {
     var idReg = id.value;
     var dato_bitacora = document.getElementById('dato_bitacora');
     var comentarios = document.getElementById('comentarios');
+    var adminUrl = document.getElementById('data-url').getAttribute('data-admin-url');
 
 
 

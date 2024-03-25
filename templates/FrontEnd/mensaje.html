@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html>
+      <!-- Mensaje de error de sesion -->
 <head>
+    <!-- Titulo del error-->>
     <title>Error - Debes Iniciar Sesión</title>
+    <!--Estilo de visualisacion del error-->
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -32,8 +35,11 @@
     </style>
 </head>
 <body>
+    <!-- Titulo de error de inicio de session-->>
     <h1>Error - Debes Iniciar Sesión</h1>
+    <!--Imagen para el error de session-->>
     <img src="{{ url_for ('static' , filename ='img/error_session.png')}}" alt="Error Image">
+    <!-- Mensaje de error de session-->>
     <p>Lo siento, debes iniciar sesión para acceder a esta página.</p>
 </body>
 </html>

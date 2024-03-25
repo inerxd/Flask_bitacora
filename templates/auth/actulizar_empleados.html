@@ -1,4 +1,5 @@
-{% extends './Form.html' %} {% block title %}Actualizar empleados{% endblock
+{% extends './auth/Form.html' %} 
+{% block title %}Actualizar empleados{% endblock
 %} {% block customCSS %}
 <link rel="stylesheet" href="{{ url_for ('static' , filename='css/actualizar_empleado.css')}}">
 {% endblock %} {% block body %}
@@ -63,7 +64,7 @@
       <button  onclick="submit_entry()">Enviar Datos</button>
     </div>
 
-   
+    <div id="data-url" data-admin-url="{{ url_for('ruta.admin') }}"></div>
   
 </div>
 

@@ -1,4 +1,4 @@
-{% extends './Form.html' %}
+{% extends './auth/Form.html' %}
 {% block title %}actualizar{% endblock %}
 {% block customCSS %}
 <link rel="stylesheet" href="{{ url_for ('static' , filename='css/actualizar.css')}}">
@@ -39,10 +39,12 @@
   <div class="form-input">
     <div class="col">
       <div class="form-floating">
-        <input type="hidden" class="form-control" id="id" value="{{datos.id_usuario}}" required />
+        <input type="hidden" class="form-control" id="id" value="{{datos.id_usuario}}"  />
       </div>
     </div>
   </div>
+  <div id="data-url" data-admin-url="{{ url_for('ruta.admin') }}"></div>
+
 
   <br>
   <button class="btn btn-primary form-submit" onclick="submit_entry()">enviar datos</button>
@@ -50,6 +52,7 @@
 </div>
 {% block customJS %}
 <script src="{{ url_for('static',filename='js/visualizar_password.js') }}"></script>
+<script src="{{ url_for('static',filename='js/uptade_email.js') }}"></script>
 {% endblock %}
 
 {% endblock %}

@@ -1,4 +1,4 @@
-{% extends './layaut.html' %}
+{% extends './FrontEnd/layaut.html' %}
 {% block title %}Login{% endblock %}
 {% block customCSS %}
 <link rel="stylesheet" href="{{ url_for ('static' , filename='css/login.css')}}">
@@ -7,7 +7,7 @@
 
 {% block body %}
 
-<form class="form-signin"  name="myForm" action="/acceso" method="POST">
+<form class="form-signin"  name="myForm" action="{{ url_for('ruta.acceso_al_sistema') }}" method="POST">
     <img class="mb-4" src="{{ url_for ('static' , filename ='img/logo.svg')}}" alt="" width="72" height="57">
     <h1 class="h3 mb-3 fw-normal">INICIAR SESION</h1>
 
@@ -21,11 +21,7 @@
         <span id="iconoMostrarOcultar" ><i class="fas fa-eye"></i></span> 
       </button>
     </div>
-    <div class="form-floating">
-      <input type="hidden" class="form-control" value="{{datos.id_usuario}}">
-  
-    </div>
-
+   
 
     
     <button class="w-100 btn btn-lg btn-primary" type ="submit" id="prueba" style="margin:1% ;">Login</button>

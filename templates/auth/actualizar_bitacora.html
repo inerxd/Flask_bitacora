@@ -1,4 +1,4 @@
-{% extends './Form.html' %}
+{% extends './auth/Form.html' %}
 {% block title %}Bitacora{% endblock %}
 {% block customCSS %}
 <link rel="stylesheet" href="{{ url_for ('static' , filename='css/actualizar_bitacora.css')}}">
@@ -24,6 +24,8 @@
         <div class="form-floating">
             <input type="hidden" class="form-control" id="id" value="{{datos.id_bitacora}}" />
         </div>
+
+        <div id="data-url" data-admin-url="{{ url_for('ruta.admin') }}"></div>
 
         <div class="checkbox mb-3">
             <button class="btn btn-primary"  onclick="submit_entry()">enviar datos</button>

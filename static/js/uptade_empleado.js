@@ -2,13 +2,13 @@
   function submit_entry() {
     var id = document.getElementById("id");
     var idReg = id.value;
-    
     var nombre = document.getElementById("nombre");
     var rfc = document.getElementById("rfc");
     var direccion = document.getElementById("direccion");
     var grado_estudio = document.getElementById("grado_estudio");
     var edad = document.getElementById("edad");
     var puesto = document.getElementById("puesto");
+    var adminUrl = document.getElementById('data-url').getAttribute('data-admin-url');
     
 
     var entry = {
@@ -33,7 +33,7 @@
     })
       .then(function (response) {
         if (response.ok) {
-          window.location.replace("http://localhost:5000/admin");
+          window.location.replace(adminUrl);
           return;
         }
         throw new Error("Error en la respuesta de red");

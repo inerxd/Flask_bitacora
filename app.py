@@ -5,9 +5,6 @@ from db import db
 
 
 
-#from flask_wtf.csrf import CSRFProtect
-#from routes.ruta import csrf
-
 app = Flask(__name__)
 socketio = SocketIO(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:padreDIOS1@localhost:5432/Proyecto'
