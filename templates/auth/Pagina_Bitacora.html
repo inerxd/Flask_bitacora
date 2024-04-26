@@ -29,14 +29,14 @@
     <form action="/registro_bitacora" method="post">
       <div class="form-group">
         <label for="contenido">Contenido:</label>
-        <textarea class="form-control" id="contenido" name="dato_bitacora" rows="5" placeholder="Ingrese la bitacora"></textarea>
+        <textarea class="form-control" id="contenido" name="log_data" rows="5" placeholder="Ingrese la bitacora"></textarea>
       </div>
       <div class="form-group">
         <label for="comentarios">Comentarios:</label>
-        <textarea class="form-control" id="comentarios" rows="5" name="comentarios" placeholder="Ingrese comentarios adicionales"></textarea>
+        <textarea class="form-control" id="comentarios" rows="5" name="comments" placeholder="Ingrese comentarios adicionales"></textarea>
       </div>
     <div class="form-floating">
-      <input type="hidden" class="form-control" id="id" name="id" value="{{ usuario.id_usuario }}"/>
+      <input type="hidden" class="form-control" id="id" name="User_id_User" value="{{ usuario.id_user }}"/>
     </div>
     <div style="display: flex ;justify-content: center;">
       <button style="margin: 3%;" type="submit" class="btn btn-primary">Guardar</button>
@@ -58,17 +58,17 @@
       </thead>
       <tbody>
         {% for bita in dato_bit %}
-        {% if bita.usuario == session.get('id_usuario')%}
+        {% if bita.User_id_User == session.get('id_user')%}
         <tr>
           <td style="text-align: center;">{{ loop.index }}</td>
-          <td style="text-align: center;width: 60%;">{{bita.dato_bitacora}}></td>
-          <td style="text-align: center;width: 40%;">{{bita.comentarios}}</td>
+          <td style="text-align: center;width: 60%;">{{bita.log_data}}></td>
+          <td style="text-align: center;width: 40%;">{{bita.comments}}</td>
           <td>
             <div style="display:flex;justify-content: center;">
               <a class="btn btn-primary" style="margin: 1%;" class="nav-link" role="button"
-                href="{{ url_for('ruta.actualizar_bitacora', id=bita.id_bitacora) }}">Actualizar</a>
+                href="{{ url_for('ruta.actualizar_bitacora', id=bita.id_Binnacle) }}">Actualizar</a>
               <a class="btn btn-primary" style="margin: 1%;" class="nav-link" role="button"
-                href="{{ url_for('ruta.Eliminar_bitacora', id=bita.id_bitacora) }}">Eliminar</a>
+                href="{{ url_for('ruta.Eliminar_bitacora', id=bita.id_Binnacle) }}">Eliminar</a>
             </div>
           </td>
         </tr>

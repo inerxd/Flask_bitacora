@@ -17,13 +17,11 @@
       </div>
     </div>
     
-    
-    
     <div class="row">
       <div class="col-12 col-md-6">
         <div class="form-group">
           <label for="nombre">Nombre del empleado:</label>
-          <input type="text" class="form-control" id="nombre" name="nombre" placeholder="javier lopez" required>
+          <input type="text" class="form-control" id="nombre" name="name" placeholder="javier lopez" required>
         </div>
       </div>
 
@@ -39,14 +37,14 @@
       <div class="col-12 col-md-6">
         <div class="form-group">
           <label for="direccion">Dirección del empleado:</label>
-          <input type="text" class="form-control" id="direccion" name="direccion" placeholder="centro avenida 15" maxlength="120" required>
+          <input type="text" class="form-control" id="direccion" name="adress" placeholder="centro avenida 15" maxlength="120" required>
         </div>
       </div>
 
       <div class="col-12 col-md-6">
         <div class="form-group">
           <label for="grado_estudio">Grado de estudio del empleado:</label>
-          <input type="text" class="form-control" id="grado_estudio" name="grado_estudio" placeholder="licenciatura concluida" maxlength="120" required>
+          <input type="text" class="form-control" id="grado_estudio" name="study_grade" placeholder="licenciatura concluida" maxlength="120" required>
         </div>
       </div>
     </div>
@@ -55,14 +53,14 @@
       <div class="col-12 col-md-6">
         <div class="form-group">
           <label for="edad">Edad del empleado:</label>
-          <input type="number" class="form-control" id="edad" name="edad" placeholder="35" maxlength="120" required>
+          <input type="number" class="form-control" id="edad" name="age" placeholder="35" maxlength="120" required>
         </div>
       </div>
 
       <div class="col-12 col-md-6">
         <div class="form-group">
           <label for="puesto">Puesto del empleado:</label>
-          <input type="text" class="form-control" id="puesto" name="puesto" placeholder="desarrollador de sadi" maxlength="120" required>
+          <input type="text" class="form-control" id="puesto" name="position" placeholder="desarrollador de sadi" maxlength="120" required>
         </div>
       </div>
     </div>
@@ -71,9 +69,9 @@
       <div class="col-12 col-md-6 offset-md-3">
         <div class="form-group">
           <label for="tipo_usuario">Selecciona el Correo del Empleado:</label>
-          <select name="id_empleado" id="id_empleado">
-            {% for email in id_email %}
-            <option value="{{ email.id_usuario }}">{{ email.usuario }}</option>
+          <select name="correo" id="id_empleado">
+            {% for correo in email %}
+            <option value="{{ correo.id_user }}">{{ correo.email }}</option>
             {% endfor %}
           </select>
         </div>

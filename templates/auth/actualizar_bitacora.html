@@ -12,17 +12,17 @@
         <!-- Div que contiene el label y el textarea para actualizar bitácora -->
         <div class="form-group">
             <label class="form-floating">actualizar bitacora</label> 
-            <textarea class="form-control area" id="dato_bitacora"  rows="4" >{{datos.dato_bitacora}}</textarea>
+            <textarea class="form-control area" id="log_data"  rows="4" >{{datos.log_data}}</textarea>
         </div>
 
         <!-- Div que contiene el label y el textarea para comentarios -->
         <div class="form-group">
             <label class="form-floating">comentarios</label>
-            <textarea class="form-control area" id="comentarios"  rows="4" placeholder="Ingrese el contenido" >{{datos.comentarios}}</textarea>
+            <textarea class="form-control area" id="comments"  rows="4" placeholder="Ingrese el contenido" >{{datos.comments}}</textarea>
         </div>
 
         <div class="form-floating">
-            <input type="hidden" class="form-control" id="id" value="{{datos.id_bitacora}}" />
+            <input type="hidden" class="form-control" id="id" value="{{datos.id_Binnacle}}" />
         </div>
 
         <div id="data-url" data-admin-url="{{ url_for('ruta.admin') }}"></div>

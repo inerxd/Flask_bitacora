@@ -107,14 +107,14 @@
                 {% for leg in user %}
                 <tr>
                   <td style="text-align: center;">{{loop.index}}</td>
-                  <td style="text-align: center;">{{leg.usuario}}</td>
+                  <td style="text-align: center;">{{leg.email}}</td>
                   <td style="text-align: center;">{{leg.password}}</td>
-                  <td style="text-align: center;">{{ leg.Tipo_User.tipo_usuarios }}</td>
+                  <td style="text-align: center;">{{ leg.User_Type.user_type }}</td>
                   <td>
                     <div class="botones">
                       <a class="btn btn-primary" style="margin: 1%;" class="nav-link" role="button"
-                        href="{{ url_for('ruta.actualizar' , id= leg.id_usuario)}}">Actualizar</a>
-                      <button class="btn btn-primary" style="margin: 1%;" onclick="eliminarEmail('{{leg.id_usuario}}' )">Eliminar</button>
+                        href="{{ url_for('ruta.actualizar' , id= leg.id_user)}}">Actualizar</a>
+                      <button class="btn btn-primary" style="margin: 1%;" onclick="eliminarEmail('{{leg.id_user}}' )">Eliminar</button>
                      
                     </div>
                   </td>
@@ -148,18 +148,18 @@
                 {% for informacion in datos_empleado %}
                 <tr>
                   <td style="text-align: center;">{{loop.index}}</td>
-                  <td style="text-align: center;">{{informacion.nombre}}</td>
-                  <td style="text-align: center;">{{informacion.Usuario.usuario}}</td>
+                  <td style="text-align: center;">{{informacion.name}}</td>
+                  <td style="text-align: center;">{{informacion.User.email}}</td>
                   <td style="text-align: center;">{{informacion.rfc}}</td>
-                  <td style="text-align: center;">{{informacion.direccion}}</td>
-                  <td style="text-align: center;">{{informacion.grado_estudio}}</td>
-                  <td style="text-align: center;">{{informacion.edad}}</td>
-                  <td style="text-align: center;">{{informacion.puesto}}</td>
+                  <td style="text-align: center;">{{informacion.adress}}</td>
+                  <td style="text-align: center;">{{informacion.study_grade}}</td>
+                  <td style="text-align: center;">{{informacion.age}}</td>
+                  <td style="text-align: center;">{{informacion.position}}</td>
                   <td>
                     <div class="botones"><a class="btn btn-primary" style="margin: 1%;" class="nav-link" role="button"
-                        href="{{ url_for('ruta.actualizar_empleados' , id= informacion.id_empleado)}}">Actualizar</a>
+                        href="{{ url_for('ruta.actualizar_empleados' , id= informacion.id_Employees)}}">Actualizar</a>
                         
-                        <button class="btn btn-primary" style="margin: 1%;" onclick="eliminarEmpleado('{{informacion.id_empleado}}' )">Eliminar</button>
+                        <button class="btn btn-primary" style="margin: 1%;" onclick="eliminarEmpleado('{{informacion.id_Employees}}' )">Eliminar</button>
                        
                     </div>
                   </td>
@@ -185,14 +185,14 @@
                 {% for bitacora in bit %}
                 <tr>
                   <td style="text-align: center;">{{ loop.index }}</td>
-                  <td style="text-align: center;">{{ bitacora.Usuario.usuario }}</td>
-                  <td style="text-align: center;width: 100%;">{{bitacora.dato_bitacora}}></td>
-                  <td style="text-align: center;width: 100%;">{{bitacora.comentarios}}</td>
+                  <td style="text-align: center;">{{ bitacora.User.id_user }}</td>
+                  <td style="text-align: center;width: 100%;">{{bitacora.log_data}}></td>
+                  <td style="text-align: center;width: 100%;">{{bitacora.comments}}</td>
                   <td>
                     <div class="botones">
                       <a class="btn btn-primary" style="margin: 1%;" class="nav-link" role="button"
-                        href="{{ url_for('ruta.actualizar_bitacora', id=bitacora.id_bitacora) }}">Actualizar</a>
-                        <button class="btn btn-primary" style="margin: 1%;" onclick="eliminarBitacora('{{bitacora.id_bitacora}}' )">Eliminar</button>
+                        href="{{ url_for('ruta.actualizar_bitacora', id=bitacora.id_Binnacle) }}">Actualizar</a>
+                        <button class="btn btn-primary" style="margin: 1%;" onclick="eliminarBitacora('{{bitacora.id_Binnacle}}' )">Eliminar</button>
                        
                     </div>
                   </td>

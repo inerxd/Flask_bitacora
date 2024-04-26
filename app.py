@@ -7,7 +7,8 @@ from db import db
 
 app = Flask(__name__)
 socketio = SocketIO(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:padreDIOS1@localhost:5432/Proyecto'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:padreDIOS1@localhost:5432/Proyecto'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:COMPUmysterryze3500@localhost:3306/projectone'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)

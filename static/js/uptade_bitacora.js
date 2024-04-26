@@ -3,16 +3,16 @@ function submit_entry() {
 
     var id = document.getElementById('id');
     var idReg = id.value;
-    var dato_bitacora = document.getElementById('dato_bitacora');
-    var comentarios = document.getElementById('comentarios');
+    var log_data = document.getElementById('log_data');
+    var comments = document.getElementById('comments');
     var adminUrl = document.getElementById('data-url').getAttribute('data-admin-url');
 
 
 
     var entry = {
 
-        dato_bitacora: dato_bitacora.value,
-        comentarios: comentarios.value,
+        log_data: log_data.value,
+        comments: comments.value,
 
     };
     console.log(entry);

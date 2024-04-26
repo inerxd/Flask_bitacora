@@ -13,7 +13,7 @@
   <h1 class="h3 mb-3 fw-normal">Actualizar los datos de correo</h1>
   <div class="form-input">
     <label for="usuario">Email address</label>
-    <input type="email" class="form-control" id="usuario" value="{{datos.usuario}}">
+    <input type="email" class="form-control" id="email" value="{{datos.email}}">
   </div>
   <div class="form-input">
     <label for="password">Contraseña</label>
@@ -28,9 +28,9 @@
   <div class="form-input">
     <label for="tipo_usuario">Tipo de usuario:</label>
     <div class="select-container">
-      <select id="tipo_usuario" class="form-select" style="margin: 5%;">
-        {% for tipos_usuario in tipo_usuario %}
-        <option value="{{tipos_usuario.id }}">{{ tipos_usuario.tipo_usuarios }}</option>
+      <select id="User_Type_id_User_Type" class="form-select" style="margin: 5%;">
+        {% for user_Types in user_Type %}
+        <option value="{{user_Types.id_User_Type }}">{{ user_Types.user_type }}</option>
         {% endfor %}
       </select>
     </div>
@@ -39,7 +39,7 @@
   <div class="form-input">
     <div class="col">
       <div class="form-floating">
-        <input type="hidden" class="form-control" id="id" value="{{datos.id_usuario}}"  />
+        <input type="hidden" class="form-control" id="id" value="{{datos.id_user}}"  />
       </div>
     </div>
   </div>

@@ -9,7 +9,7 @@
   
     <div class="form-floating">
       <input type="hidden" name="csrf_token" value="{{csrf_token}}" />
-      <input type="email" class="form-control" id="email" name="usuario" placeholder="name@example.com" required />
+      <input type="email" class="form-control" name="email" id="email"  placeholder="name@example.com" required />
       <label for="floatingInput">Email address</label>
     </div>
     <div class="input-group mb-3">
@@ -26,9 +26,9 @@
       <label for="tipo_usuario">Tipo de usuario:</label>
     </div>
     <div class="col">
-      <select name="id_tipo_usuario" id="tipo_usuario">
-        {% for tipos_usuario in tipo_usuario %} 
-        <option value="{{ tipos_usuario.id }}">{{ tipos_usuario.tipo_usuarios }}</option>
+      <select name="User_Type_id_User_Type" id="user_type">
+        {% for user_Types in user_Type %} 
+        <option value="{{ user_Types.id_User_Type }}">{{ user_Types.user_type }}</option>
         {% endfor %}
       </select>
     </div>

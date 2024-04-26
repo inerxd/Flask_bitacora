@@ -58,8 +58,7 @@ class Tipo_User(db.Model):
     def __init__(self,tipo_usuarios,):
         self.tipo_usuarios = tipo_usuarios
       
-   
-       
+
 
 
 

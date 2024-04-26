@@ -1,7 +1,8 @@
 from flask import Blueprint, flash, render_template, request, url_for, redirect, flash, session, jsonify, make_response
 #from app import socketio, emit
 # from flask_wtf.csrf import CSRFProtect
-from Models.date import Usuario, Empleados, Bitacora, Tipo_User
+from Models.datemysql import User, User_Type, Employees, Binnacle
+#from Models.date import Usuario, Empleados, Bitacora, Tipo_User
 from db import db
 from static.dicionario import *
 
@@ -41,8 +42,9 @@ def verificar_sesion():
 @ruta.route("/registro")
 def registro():
     if verificar_sesion():
-        tipo_usuario = Tipo_User.query.all()
-        return render_template('auth/registro.html', tipo_usuario=tipo_usuario)
+        #tipo_usuario = Tipo_User.query.all()
+        user_Type = User_Type.query.all()
+        return render_template('auth/registro.html', user_Type=user_Type)
     else:
         mensaje = "Lo siento, debes iniciar sesión para acceder a esta página."
         return render_template('mensaje.html', mensaje=mensaje)
@@ -52,10 +54,14 @@ def registro():
 @ruta.route("/Datos", methods=['POST'])
 def vacio2():
   
-        name = request.form['usuario']
+        """name = request.form['usuario']
         name2 = request.form['password']
-        name3 = request.form['id_tipo_usuario']
-        me = Usuario(name, name2,name3)
+        name3 = request.form['id_tipo_usuario']"""
+        name = request.form['email']
+        name2 = request.form['password']
+        name3 = request.form['User_Type_id_User_Type']
+        me = User(name, name2,name3)
+        #me = Usuario(name, name2,name3)
         db.session.add(me)
         db.session.commit()
         return redirect(url_for("ruta.admin"))
@@ -64,15 +70,17 @@ def vacio2():
 @ruta.route("/actualizar/<id>", methods=['GET', 'PUT'])
 def actualizar(id):
     if verificar_sesion(): 
-        datos = Usuario.query.get(id)
-        tipo_usuario = Tipo_User.query.all()
+        #datos = Usuario.query.get(id)
+        #tipo_usuario = Tipo_User.query.all()
+        datos = User.query.get(id)
+        user_Type = User_Type.query.all()
         if request.method == "GET":
-            return render_template('auth/actualizar.html', datos=datos, tipo_usuario=tipo_usuario)
+            return render_template('auth/actualizar.html', datos=datos, user_Type=user_Type)
         req = request.get_json()
         if request.method == "PUT":
-            datos.usuario = req['usuario']
+            datos.email = req['email']
             datos.password = req['password']
-            datos.id_tipo_usuario = req['tipo_usuario']
+            datos.User_Type_id_User_Type = req['User_Type_id_User_Type']
             
             db.session.commit()
 
@@ -84,7 +92,8 @@ def actualizar(id):
 @ruta.route("/Eliminar/<id>",methods=['DELETE'])
 def Eliminar(id):
     if verificar_sesion() and request.method == 'DELETE':  
-        eliminar = Usuario.query.get(id)  
+        #eliminar = Usuario.query.get(id)
+        eliminar = User.query.get(id)    
         if eliminar:
             db.session.delete(eliminar)
             db.session.commit()
@@ -98,14 +107,16 @@ def Eliminar(id):
 @ruta.route("/RegistroE")
 def RegistroE():
     if verificar_sesion():    
-        id_email = Usuario.query.all()
-        return render_template('auth/RegistroEmpleado.html', id_email=id_email)
+        #id_email = Usuario.query.all()
+        email = User.query.all()
+        return render_template('auth/RegistroEmpleado.html', email=email)
     else:
         return render_template('mensaje.html')
 # ingreso de los datos de empleados
 @ruta.route("/empleado", methods=['POST'])
 def registro_empleado():
     if verificar_sesion():    
+        """
         dato_empleado0 = request.form['nombre']
         dato_empleado1 = request.form['rfc']
         dato_empleado2 = request.form['direccion']
@@ -113,8 +124,19 @@ def registro_empleado():
         dato_empleado4 = request.form['edad']
         dato_empleado5 = request.form['puesto']
         dato_empleado6 = request.form['id_empleado']
+        """
+        dato_empleado0 = request.form['name']
+        dato_empleado1 = request.form['rfc']
+        dato_empleado2 = request.form['adress']
+        dato_empleado3 = request.form['study_grade']
+        dato_empleado4 = request.form['age']
+        dato_empleado5 = request.form['position']
+        dato_empleado6 = request.form['correo']
 
-        me = Empleados(dato_empleado0, dato_empleado1, dato_empleado2, dato_empleado3,
+        #me = Empleados(dato_empleado0, dato_empleado1, dato_empleado2, dato_empleado3,
+                    #dato_empleado4, dato_empleado5, dato_empleado6)
+        
+        me = Employees(dato_empleado0, dato_empleado1, dato_empleado2, dato_empleado3,
                     dato_empleado4, dato_empleado5, dato_empleado6)
         db.session.add(me)
         db.session.commit()
@@ -126,7 +148,7 @@ def registro_empleado():
 @ruta.route("/actualizar_empleado/<id>", methods=['GET', 'PUT'])
 def actualizar_empleados(id):
     if verificar_sesion():    
-        datos = Empleados.query.get(id)
+        datos = Employees.query.get(id)
         if request.method == "GET":
             
             
@@ -136,12 +158,12 @@ def actualizar_empleados(id):
         if request.method == "PUT":
             
             
-            datos.nombre = req['nombre']  
+            datos.name = req['name']  
             datos.rfc = req['rfc']
-            datos.direccion = req['direccion']
-            datos.grado_estudio = req['grado_estudio']
-            datos.edad = req['edad']
-            datos.puesto = req['puesto']
+            datos.adress = req['adress']
+            datos.study_grade = req['study_grade']
+            datos.age = req['age']
+            datos.position = req['position']
             
             db.session.commit()
             
@@ -157,7 +179,7 @@ def actualizar_empleados(id):
 @ruta.route("/Eliminarempleado/<id>",methods=['DELETE'])
 def Eliminar_empleado(id):
     if verificar_sesion() and request.method == 'DELETE':       
-        eliminar = Empleados.query.get(id)
+        eliminar = Employees.query.get(id)
         if eliminar:    
             db.session.delete(eliminar)
             db.session.commit()
@@ -167,7 +189,7 @@ def Eliminar_empleado(id):
         return render_template('mensaje.html')
 @ruta.route("/entrar")
 def entrar():
-    datos = Usuario.query.all()
+    datos = User.query.all()
     if request.method == 'GET':
         return render_template('login.html',datos=datos)
 
@@ -181,16 +203,16 @@ def acceso_al_sistema():
     name = request.form['usuario']
     name2 = request.form['password']
     if request.method == 'POST':
-        me = db.session.query(Usuario).filter_by(
-            usuario=name, password=name2).first()
+        me = db.session.query(User).filter_by(
+            email=name, password=name2).first()
 
     if (me != None):
         session['prueba'] = name
-        session['id_usuario'] = me.id_usuario
-        if (me.Tipo_User.id == 1):
+        session['id_user'] = me.id_user
+        if (me.User_Type.id_User_Type == 1):
             flash(Mensaje_admin, 'succes')
             return redirect(url_for("ruta.admin"))
-        elif (me.Tipo_User.id == 2):
+        elif (me.User_Type.id_User_Type == 2):
 
             return redirect(url_for("ruta.bit"))
         else:
@@ -203,9 +225,9 @@ def acceso_al_sistema():
 
 @ruta.route("/admin", methods=['GET', 'POST', 'PUT','DELETE'])
 def admin():
-    datos_empleado = Empleados.query.all()
-    user = Usuario.query.all()
-    bit = Bitacora.query.all()
+    datos_empleado = Employees.query.all()
+    user = User.query.all()
+    bit = Binnacle.query.all()
     if 'prueba' in session:   
            
             return render_template('auth/ultima.html', datos_empleado=datos_empleado, user=user,bit=bit)
@@ -226,10 +248,10 @@ def logout():
 @ruta.route("/bitacora")
 def bit():
         if verificar_sesion():   
-            id_usuario = session.get('id_usuario')
-            if id_usuario is not None:
-                dato_bit = Bitacora.query.all()
-                usuario = Usuario.query.get(id_usuario)
+            id_user = session.get('id_user')
+            if id_user is not None:
+                dato_bit = Binnacle.query.all()
+                usuario = User.query.get(id_user)
             
                 return render_template("auth/pagina_Bitacora.html",usuario=usuario,dato_bit=dato_bit)
         else:
@@ -239,11 +261,11 @@ def bit():
 def registro_bitacora():
 
     if verificar_sesion():   
-        name = request.form['dato_bitacora']
-        name2 = request.form['comentarios']
-        id = request.form['id']
+        name = request.form['log_data']
+        name2 = request.form['comments']
+        id = request.form['User_id_User']
 
-        me = Bitacora(name, name2, id)
+        me = Binnacle(name, name2, id)
         db.session.add(me)
         db.session.commit()
 
@@ -255,15 +277,15 @@ def registro_bitacora():
 @ruta.route("/actualizar_bitacora/<id>", methods=['GET', 'PUT'])
 def actualizar_bitacora(id):
     if verificar_sesion(): 
-        datos = Bitacora.query.get(id)
+        datos = Binnacle.query.get(id)
 
         if request.method == "GET":
             return render_template('auth/actualizar_bitacora.html', datos=datos)
         req = request.get_json()
         if request.method == "PUT":
 
-            datos.dato_bitacora = req['dato_bitacora']
-            datos.comentarios = req['comentarios']
+            datos.log_data = req['log_data']
+            datos.comments = req['comments']
             db.session.commit()
             return redirect(url_for("ruta.admin"))
             
@@ -274,7 +296,7 @@ def actualizar_bitacora(id):
 @ruta.route("/Eliminarbitacora/<id>",methods=['DELETE'])
 def Eliminar_bitacora(id):
     if verificar_sesion() and request.method == 'DELETE':   
-        eliminar = Bitacora.query.get(id)
+        eliminar = Binnacle.query.get(id)
         if eliminar:   
             db.session.delete(eliminar)
             db.session.commit()

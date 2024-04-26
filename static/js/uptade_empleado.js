@@ -2,23 +2,23 @@
   function submit_entry() {
     var id = document.getElementById("id");
     var idReg = id.value;
-    var nombre = document.getElementById("nombre");
+    var name = document.getElementById("name");
     var rfc = document.getElementById("rfc");
-    var direccion = document.getElementById("direccion");
-    var grado_estudio = document.getElementById("grado_estudio");
-    var edad = document.getElementById("edad");
-    var puesto = document.getElementById("puesto");
+    var adress = document.getElementById("adress");
+    var study_grade = document.getElementById("study_grade");
+    var age = document.getElementById("age");
+    var position = document.getElementById("position");
     var adminUrl = document.getElementById('data-url').getAttribute('data-admin-url');
     
 
     var entry = {
       
-      nombre: nombre.value,
+      name: name.value,
       rfc: rfc.value,
-      direccion: direccion.value,
-      grado_estudio: grado_estudio.value,
-      edad: edad.value,
-      puesto: puesto.value,
+      adress: adress.value,
+      study_grade: study_grade.value,
+      age: age.value,
+      position: position.value,
 
     };
 
